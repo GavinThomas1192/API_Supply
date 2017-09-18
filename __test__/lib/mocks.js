@@ -14,7 +14,8 @@ mocks.user.createOne = function() {
   result.password = faker.internet.password();
 
   let user = new User({
-    username: faker.infternet.userName(),
+    name: faker.name.firstName(),
+    username: faker.internet.userName(),
     email: faker.internet.email(),
   });
 
@@ -30,7 +31,7 @@ mocks.user.createOne = function() {
     });
 };
 
-mocks.gallery.creatOne = function() {
+mocks.APISupply.creatOne = function() {
 
   return mocks.user.createOne()
     .then(userData => this.results = userData)
