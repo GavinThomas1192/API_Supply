@@ -1,13 +1,13 @@
 'use strict';
 
-const debug = require('debug')('cfgram:route-auth');
+const debug = require('debug')('APISupply:route-auth');
 const errorHandler = require('../lib/error-handler');
 const basicAuth = require('../lib/basic-auth-middleware');
 const User = require('../model/user');
 
 module.exports = function(router) {
-  router.post('/api/signup', (req, res) => {
-    debug('POST /api/signup');
+  router.post('/api/signUp', (req, res) => {
+    debug('POST /api/singUp');
 
     // get rid of the PW on req.body before the req is handed back as a nested object in the res
     let pw = req.body.password;
@@ -23,8 +23,8 @@ module.exports = function(router) {
       .catch(err => errorHandler(err, req, res));
   });
 
-  router.get('/api/signin', basicAuth, (req, res) => {
-    debug('GET /api/signin');
+  router.get('/api/signIn', basicAuth, (req, res) => {
+    debug('GET /api/singIn');
 
     return User.findOne({ username: req.auth.username })
       .then(user => user.comparePasswordHash(req.auth.password))

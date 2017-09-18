@@ -8,9 +8,12 @@ const crypto = require('crypto');
 
 const User = mongoose.Schema({
   username: { type: String, require: true, unique: true },
+  name: { type: String, require: true, unique: true },
   password: { type: String, require: true },
   email: { type: String, require: true },
+  subscribedToEmail: { type: String, require: true, unique: true },
   findHash: { type: String, unique: true },
+  isAdmin: {type: Boolean, require: true},
 });
 
 User.methods.generatePasswordHash = function(password) {
