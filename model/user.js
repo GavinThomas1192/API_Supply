@@ -8,9 +8,13 @@ const crypto = require('crypto');
 
 const User = mongoose.Schema({
   username: { type: String, require: true, unique: true },
+  name: { type: String, require: true, unique: true },
   password: { type: String, require: true },
   email: { type: String, require: true },
+  subscribedToEmail: { type: Boolean, require: true},
   findHash: { type: String, unique: true },
+  isAdmin: {type: Boolean, require: true},
+  favorites: {type: Boolean, require: false},
 });
 
 User.methods.generatePasswordHash = function(password) {
@@ -36,23 +40,23 @@ User.methods.comparePasswordHash = function(password) {
 };
 
 User.methods.generateFindHash = function() {
+  // unique hash to the user which will help us create a token for further auth'd requests
 
   return new Promise((resolve, reject) => {
     let tries = 0;
-    _generateFindHash.call(this);
 
-    function _generateFindHash() {
-      this.findhash = crypto.randomBytes(32).toString('hex');
+    let _generateFindHash = () => {
+      this.findHash = crypto.randomBytes(32).toString('hex');
       this.save()
-        .then(() => resolve(this.findhash))
+        .then(() => resolve(this.findHash))
         .catch(err => {
-          if(tries < 3) {
-            tries++;
-            _generateFindHash.call(this);
-          }
-          if(err) return reject(err);
+          if(tries > 3) return reject(new Error('authorization failed; could not validate findHash'));
+          tries++;
+          _generateFindHash();
         });
-    }
+    };
+
+    _generateFindHash();
   });
 };
 

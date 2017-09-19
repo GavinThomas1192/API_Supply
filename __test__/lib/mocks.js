@@ -1,7 +1,7 @@
 'use strict';
 
 const User = require('../../model/user');
-const Gallery = require('../../model/gallery');
+const APISupply = require('../../model/APISupply');
 const Photo = require('../../model/photo');
 const faker = require('faker');
 
@@ -14,7 +14,8 @@ mocks.user.createOne = function() {
   result.password = faker.internet.password();
 
   let user = new User({
-    username: faker.infternet.userName(),
+    name: faker.name.firstName(),
+    username: faker.internet.userName(),
     email: faker.internet.email(),
   });
 
@@ -30,12 +31,12 @@ mocks.user.createOne = function() {
     });
 };
 
-mocks.gallery.creatOne = function() {
+mocks.APISupply.creatOne = function() {
 
   return mocks.user.createOne()
     .then(userData => this.results = userData)
     .then(userData => {
-      return new Gallery({
+      return new APISupply({
         name: faker.random.word(),
         desc: faker.random.words(12),
         userId: userData.user._id,
@@ -66,7 +67,7 @@ mocks.photo.creatOne = function() {
 
 mocks.gallery.removeAll = function() {
   return Promise.all([
-    Gallery.remove(),
+    APISupply.remove(),
   ]);
 };
 
