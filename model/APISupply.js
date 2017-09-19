@@ -12,10 +12,9 @@ const APISupply = mongoose.Schema({
   tokenRequired: {type: Boolean, required: true},
   tokenAccessWaitTime: {type: String, required: true},
   maxReqMin: {type: String, required: true},
-  numUsersFav: {type: String, required: true},
+  numUsersFav: {type: String, required: false},
   category: {type: String, required: true},
-
-  userId: { type:mongoose.Schema.Types.ObjectId, required: true, ref: 'user' },
+  userId: { type:mongoose.Schema.Types.ObjectId, required: true },
 }, { timestamps: true });
 
 module.exports = mongoose.model('APISupply', APISupply);

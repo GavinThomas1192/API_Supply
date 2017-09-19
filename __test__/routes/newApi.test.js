@@ -14,7 +14,7 @@ describe('Testing API-Supply Routes', function() {
   afterEach(mocks.user.removeAll);
 
 
-//****************POST****************
+  //****************POST****************
   describe('POST to /api/newApi', function() {
     describe('Valid Requests', () => {
       beforeAll(() => {
@@ -73,7 +73,7 @@ describe('Testing API-Supply Routes', function() {
     });
   });
 
-//****************GETALL****************
+  //****************GETALL****************
   describe('GET to /api/newApi/getAll', function() {
     describe('Valid Requests to GETALL', () => {
       beforeAll(() => {
@@ -173,7 +173,7 @@ describe('Testing API-Supply Routes', function() {
       });
     });
   });
-//****************GETBYCATEGORY****************
+  //****************GETBYCATEGORY****************
 
   describe('GET to /api/getAllByCategory', function() {
     describe('Valid Requests to GET by Categoy', () => {
@@ -228,7 +228,7 @@ describe('Testing API-Supply Routes', function() {
     });
   });
 
-//****************PUTBYID****************
+  //****************PUTBYID****************
   describe('PUT to /api/newApi', function() {
     describe('Valid Requests to PUT', () => {
       beforeAll(() => {
@@ -301,7 +301,7 @@ describe('Testing API-Supply Routes', function() {
     });
   });
 
-//****************DELETEBYID****************
+  //****************DELETEBYID****************
   describe('DELETE to /api/newApi', function() {
     describe('Valid Requests to DELETE', () => {
       beforeAll(() => {
