@@ -28,6 +28,14 @@ module.exports = function(router) {
       .catch(err => errorHandler(err, req, res));
   });
 
+  router.get('/api/newApi/getAllByCategory/:_category', bearerAuth, (req, res) => {
+    debug('GET /api/newApi/:_category');
+
+    return APISupply.find({ 'category': req.params._category})
+      .then(api => res.json(api))
+      .catch(err => errorHandler(err, req, res));
+  });
+
   router.get('/api/newApi/getAll', (req, res) => {
     debug('GET /api/gallery');
 
