@@ -2,12 +2,11 @@
 
 const User = require('../../model/user');
 const APISupply = require('../../model/APISupply');
-const Photo = require('../../model/photo');
 const faker = require('faker');
 
 const mocks = module.exports =  {};
 mocks.user = {};
-mocks.gallery = {};
+mocks.APISupply = {};
 
 mocks.user.createOne = function() {
   let result = {};
@@ -31,7 +30,7 @@ mocks.user.createOne = function() {
     });
 };
 
-mocks.APISupply.creatOne = function() {
+mocks.APISupply.createOne = function() {
 
   return mocks.user.createOne()
     .then(userData => this.results = userData)
@@ -42,30 +41,14 @@ mocks.APISupply.creatOne = function() {
         userId: userData.user._id,
       }).save();
     })
-    .then(gallery => {
-      this.results.gallery = gallery;
+    .then(APISupply => {
+      this.results.APISupply = APISupply;
       return this.results;
     });
 };
 
-mocks.photo.creatOne = function() {
 
-  return mocks.user.createOne()
-    .then(userData => this.results = userData)
-    .then(userData => {
-      return new Photo({
-        name: faker.random.word(),
-        desc: faker.random.words(12),
-        userId: userData.user._id,
-      }).save();
-    })
-    .then(photo => {
-      this.results.photo = photo;
-      return this.results;
-    });
-};
-
-mocks.gallery.removeAll = function() {
+mocks.APISupply.removeAll = function() {
   return Promise.all([
     APISupply.remove(),
   ]);
