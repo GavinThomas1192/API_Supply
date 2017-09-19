@@ -7,7 +7,7 @@ const server = require('../../lib/server');
 // const Gallery = require('../../model/gallery');
 require('jest');
 
-describe('Testing API-Supply Routes', function() {
+xdescribe('Testing API-Supply Routes', function() {
   beforeAll(server.start);
   afterAll(server.stop);
   afterEach(mocks.APISupply.removeAll);
