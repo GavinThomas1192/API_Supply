@@ -4,9 +4,10 @@ const debug = require('debug')('APISupply:route-auth');
 const errorHandler = require('../lib/error-handler');
 const basicAuth = require('../lib/basic-auth-middleware');
 const User = require('../model/user');
+const jsonParser = require('body-parser').json();
 
 module.exports = function(router) {
-  router.post('/api/signUp', (req, res) => {
+  router.post('/api/signUp', jsonParser, (req, res) => {
     debug('POST /api/singUp');
 
     // get rid of the PW on req.body before the req is handed back as a nested object in the res
