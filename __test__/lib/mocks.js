@@ -9,24 +9,28 @@ mocks.user = {};
 mocks.APISupply = {};
 
 mocks.user.createOne = function() {
-  let result = {};
-  result.password = faker.internet.password();
+  this.result = {
+    password: faker.internet.password(),
+  };
+  // result.password = faker.internet.password();
 
   let user = new User({
-    name: faker.name.firstName(),
     username: faker.internet.userName(),
+    name: faker.name.firstName(),
     email: faker.internet.email(),
+    subscribedToEmail: true,
+    isAdmin: true,
   });
 
-  return user.generatePasswordHash(result.password)
+  return user.generatePasswordHash(this.result.password)
     .then(user => {
-      result.user = user;
+      this.result.user = user;
       return user.save();
     })
     .then(user => user.generateToken())
     .then(token => {
-      result.token = token;
-      return result;
+      this.result.token = token;
+      return this.result;
     });
 };
 
