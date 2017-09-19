@@ -1,24 +1,30 @@
-# API_Supply
-Your one stop API resource!
+### Welcome to API_Supply! Your API of APIs designed with code school students in mind.
 
+This RESTful Program Application Interface(API) is a collection of useful APIs meant for Code Fellows 301 students to use to help brainstorm final project ideas. It's an API of APIs!
 
-# *SeveringUpSomeAuthpresso*
-# Servering the best Authpresso Experience around.
+This portion of the project is only the back-end infrastructure and functionality to create, read, update and delete data from a user and superuser standpoint. These two types of users can create an authenticated account to search through our small database of popular APIs by category, vet each API to ensure it will be useful, then add them to a list of favorites. Only the superuser has API update and delete privileges.
+?????????????????????????
 
-# Username login information encoding demonstration using Express, node.js, and MongoDB.
+#### Username login information encoding demonstration using Express, node.js, and MongoDB.
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
-## Project Description
+### Project Description
 Using node.js, HTTP, superagent, Express, MongoDB, and Mongoose I have created a Server that responds to different GET, POST, PUT, and DELETE responses from a developer position. The requests can interact with a local Database managed with MongoDB. We can create relationships between two schema's. In this example I use toys and children. A toy MUST belong to a child, but a child can NOT have a toy. This project represents what is possible with a few simple tools. We can create a Database from POST requests with the information provided by the dev. Then we can interact with the database with GET, PUT, and DELETE.
 
-## Table of Contents
+### Table of Contents
++ [About the Team](#About the Team)
 + [Installation](#installation)
++ [Flowchart](#Flowchart)
++ [Resources](#Resources)
 + [Usage](#Usage)
-+ [About](#About)
 
-### Installation:
+#### About the Team
+* [Isaiah Walker](https://github.com/Lonewalker72)
+* [Madeline Stevens](https://github.com/madhubs)
+* [Gavin Thomas](https://github.com/GavinThomas1192)
+
+#### Installation:
 + Fork this repository and clone the forked repository anywhere you'd like on your computer.
-<!-- hope this works -->
 + Open your terminal
   + Navigate to the folder where you did your git clone with your newly forked repository.
   + Make sure you are in the root directory IE. lab-gavin.;
@@ -42,34 +48,34 @@ Using node.js, HTTP, superagent, Express, MongoDB, and Mongoose I have created a
   + `mongo` then
 
   + From the second terminal window you can signin/signup (GET /POST).
-  ### User POST/signup requests
+  #### User POST/signup requests
   + Example ==>`http POST localhost:3000/api/signup username=name password=password email=test@test.com`
   + Example w/ Mock info ==> `http POST localhost:3000/api/signup username=Gavinator password=35353 email=email@test.com`
 
-  ### User GET/signin requests
+  #### User GET/signin requests
   + Example.==>`http GET localhost:3000/api/signin username:password`
   + Example w/ Mock ID ==> `http GET localhost:3000/api/signin/gavinator:35353`
 
 
 
-  + Also from the the second terminal window you can make a series of GET, POST, PUT, and DELETE requests for your Gallery.
-  ### Gallery POST
+  + Also from the the second terminal window you can make a series of GET, POST, PUT, and DELETE requests for database APIs.
+  #### API POST
   + Example ==>`http POST localhost:3000/api/gallery name=name desc=password`
   + Example w/ Mock info ==> `http POST localhost:3000/api/gallery name=Gavinator desc=35353`
 
-  ### Gallery GET
+  #### API GET
   + Example.==>`http GET localhost:3000/api/gallery/_id:`
   + Example w/ Mock ID ==> `http GET localhost:3000/api/gallery/377448883737262`
 
-  ### Gallery GETALL
+  #### Gallery GETALL
   + Example.==>`http GET localhost:3000/api/gallery`
   + Example w/ Mock ID ==> `http GET localhost:3000/api/gallery`
 
-  ### Gallery PUT
+  #### Gallery PUT
   + Example.==>`http GET localhost:3000/api/gallery/_id: name:name desc=desc`
   + Example w/ Mock ID ==> `http PUT localhost:3000/api/gallery/3384748484 name:Moana desc=pilot`
 
-  ### Gallery DELETE
+  #### Gallery DELETE
   + Example.==>`http GET localhost:3000/api/gallery/_id:`
   + Example w/ Mock ID ==> `http GET localhost:3000/api/gallery/484747483`
 
@@ -86,27 +92,26 @@ Using node.js, HTTP, superagent, Express, MongoDB, and Mongoose I have created a
 
   + Also from the the second terminal window you can make a series of GET, POST, PUT, and DELETE requests to upload a photo.
 
-  ## All routes require an AUTH token which you recieve on signup/signin
-  ### Photo POST
+  ### All routes require an AUTH token which you recieve on signup/signin
+  #### Photo POST
   + Example ==>`http POST localhost:3000/api/photo image name desc galleryId`
   + Example w/ Mock info ==> `http POST localhost:3000/api/photo image=directPathToImage.png name=TestImage desc=TestImageDesc galleryId=3766474738822`
 
-  ### Photo GET
+  #### Photo GET
   + Example.==>`http GET localhost:3000/api/photo/_id:`
   + Example w/ Mock ID ==> `http GET localhost:3000/api/photo/377448883737262`
 
-  ### Photo GETALL
+  #### Photo GETALL
   + Example.==>`http GET localhost:3000/api/photo`
   + Example w/ Mock ID ==> `http GET localhost:3000/api/photo`
 
-  ### Photo PUT
+  #### Photo PUT
   + Example.==>`http GET localhost:3000/api/photo/_id: image= name= desc= galleryId=`
   + Example w/ Mock ID ==> `http PUT localhost:3000/api/photo/3384748484 image=directPathToImage.png name=TestImage desc=TestImageDesc galleryId=3766474738822`
 
-  ### Photo DELETE
+  #### Photo DELETE
   + Example.==>`http GET localhost:3000/api/photo/_id:`
   + Example w/ Mock ID ==> `http GET localhost:3000/api/photo/484747483 objectKey=23452345fsdg userId=afdgsfdg3454`
-
 
 
 <!-- ```
@@ -130,9 +135,16 @@ for code blocks
   + `db.users.find()``
     + This will delete all the documents or items in the database under the collections you used.
 
-### Usage
+#### Flowchart
+This flowchart will help visualize our requests, our routes and our endpoints.
+![flowchart]()
+
+#### Resources
+* [TheseHillsHaveAPIs](https://github.com/kdwinck/TheHillsHaveAPIs/blob/master/README.md)
+* [Shooters](https://github.com/gsmatth/shooters-log/blob/staging/README.md)
+* [Programmable Web](https://www.programmableweb.com/category/accounting/apis?category=19967)
+* [Postman](https://www.getpostman.com)
+
+
+#### Usage
 This app is completely free to be used however you'd like!
-
-
-### About
-I am currently a Full Stack Web Developer with focus in UX. If you are interested in using me for any of your projects please feel free to reach out to me!
