@@ -354,19 +354,7 @@ _______________
 ```NOTE: Upon successful request expect a 204```
 _______________
 
-+ If you want to interact with your database through mongo and mongoose...
-+ In your fourth terminal window you can use the following commands.
-+ `show collections`
-+ This shows all your collections that are in the database
-+ `use toy-dev`
-+ This will switch to the collection you want, allowing you to manipulate the data inside. In this example I used toy-dev which will also be the name of the collection for you, if installed correctly.
-+ `db.galleries.find()`
-+ `db.users.find()`
-+ This will return all the documents or items in the database under the collection you used.
-+ `db.galleries.find()`
-+ `db.users.find()``
-+ This will delete all the documents or items in the database under the collections you used.
-    This app is completely free to be used however you'd like!
+
 #### Resources
 * [TheseHillsHaveAPIs](https://github.com/kdwinck/TheHillsHaveAPIs/blob/master/README.md)
 * [Shooters](https://github.com/gsmatth/shooters-log/blob/staging/README.md)
