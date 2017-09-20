@@ -6,6 +6,7 @@ const debug = require('debug')('APISupply:APISupply');
 const bearerAuth = require('../lib/bearer-auth-middleware');
 const jsonParser = require('body-parser').json();
 
+
 module.exports = function(router) {
   //************POST************
   router.post('/api/newApi', bearerAuth, jsonParser, (req, res) => {
@@ -32,27 +33,19 @@ module.exports = function(router) {
   router.get('/api/newApi/getAllByCategory/:_category', bearerAuth, (req, res) => {
     debug('GET /api/newApi/:_category');
 
-    return APISupply.find({ 'category': req.params._category})
+    return APISupply.find({ '_category': `${req.params._category}`})
 
-    // jwt.verify(token, process.env.APP_SECRET, (err, decoded) => {
-    //   if(err) {
-    //     err.message = 'authorization failed; token not verified';
-    //     return errorHandler(err, req, res);
-    //   }
-    //
-    //   User.findOne({ findHash: decoded.token })
-    //     .then(user => {
-    //       // delete user.password;
-    //       req.user = user;
-    //       next();
-    //       //send off to isadmin middleware to be written
-    //     })
-    //     .catch(err => errorHandler(err, req, res));
-    // });
-    //NEED TO VERIFY THAT API ISN'T AN EMPTY ARRAY
-      .then(api => res.json(api))
+
+      .then(api => {
+        console.log(api);
+        console.log(typeof(api));
+
+        if(!api) return errorHandler(new Error('No Such Category; must be complete'));
+        res.json(api);
+      })
       .catch(err => errorHandler(err, req, res));
   });
+
 
   router.get('/api/newApi/getAll', bearerAuth, (req, res) => {
     debug('GET /api/gallery');
@@ -66,6 +59,17 @@ module.exports = function(router) {
   router.put('/api/newApi/:_id', bearerAuth, jsonParser, (req, res) => {
     debug('PUT /api/newApi');
 
+    if(!req.body.name) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.url) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.desc) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.examplesOfUse) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.examplesInUse) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.rating) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.tokenRequired) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.tokenAccessWaitTime) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.maxReqMin) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.numUsersFav) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body._category) return errorHandler(new Error('All Fields; must be complete'));
 
     console.log(req.user.isAdmin);
     if(req.user.isAdmin === true){
@@ -83,7 +87,7 @@ module.exports = function(router) {
             api.tokenAccessWaitTime = req.body.tokenAccessWaitTime || api.tokenAccessWaitTime;
             api.maxReqMin = req.body.maxReqMin || api.maxReqMin;
             api.numUsersFav = req.body.numUsersFav || api.numUsersFav;
-            api.category = req.body.category || api.category;
+            api.category = req.body._category || api._category;
 
 
             return api.save();
