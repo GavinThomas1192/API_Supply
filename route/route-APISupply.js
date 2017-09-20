@@ -6,21 +6,19 @@ const debug = require('debug')('APISupply:APISupply');
 const bearerAuth = require('../lib/bearer-auth-middleware');
 const jsonParser = require('body-parser').json();
 
+
 module.exports = function(router) {
   //************POST************
   router.post('/api/newApi', bearerAuth, jsonParser, (req, res) => {
     debug('POST /api/newApi');
 
-    // http POST (auth token) :5000/api/gallery name='my fancy gallery' desc='it be dabomb'
 
     req.body.userId = req.user._id;
 
-    if(req.user.isAdmin.toString() === true){
+    if(req.user.isAdmin === true){
       return new APISupply(req.body).save()
         .then(api => res.status(201).json(api))
         .catch(err => errorHandler(err, req, res));
-    } else {
-      errorHandler(new Error('authorization failed; user does not have access to update'), req, res);
     }
   });
   //************GET************
@@ -35,10 +33,19 @@ module.exports = function(router) {
   router.get('/api/newApi/getAllByCategory/:_category', bearerAuth, (req, res) => {
     debug('GET /api/newApi/:_category');
 
-    return APISupply.find({ 'category': req.params._category})
-      .then(api => res.json(api))
+    return APISupply.find({ '_category': `${req.params._category}`})
+
+
+      .then(api => {
+        console.log(api);
+        console.log(typeof(api));
+
+        if(!api) return errorHandler(new Error('No Such Category; must be complete'));
+        res.json(api);
+      })
       .catch(err => errorHandler(err, req, res));
   });
+
 
   router.get('/api/newApi/getAll', bearerAuth, (req, res) => {
     debug('GET /api/gallery');
@@ -52,7 +59,21 @@ module.exports = function(router) {
   router.put('/api/newApi/:_id', bearerAuth, jsonParser, (req, res) => {
     debug('PUT /api/newApi');
 
-    if(req.user.isAdmin.toString() === true){
+    if(!req.body.name) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.url) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.desc) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.examplesOfUse) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.examplesInUse) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.rating) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.tokenRequired) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.tokenAccessWaitTime) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.maxReqMin) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body.numUsersFav) return errorHandler(new Error('All Fields; must be complete'));
+    if(!req.body._category) return errorHandler(new Error('All Fields; must be complete'));
+
+    console.log(req.user.isAdmin);
+    if(req.user.isAdmin === true){
+      console.log(req.user.isAdmin);
       return APISupply.findById(req.params._id)
         .then(api => {
           if(api.userId.toString() === req.user._id.toString()) {
@@ -66,27 +87,24 @@ module.exports = function(router) {
             api.tokenAccessWaitTime = req.body.tokenAccessWaitTime || api.tokenAccessWaitTime;
             api.maxReqMin = req.body.maxReqMin || api.maxReqMin;
             api.numUsersFav = req.body.numUsersFav || api.numUsersFav;
-            api.category = req.body.category || api.category;
+            api.category = req.body._category || api._category;
 
 
             return api.save();
           }
-          errorHandler(new Error('authorization failed; user does not have access to update'), req, res);
         })
         .then(() => res.sendStatus(204))
         .catch(err => errorHandler(err, req, res));
-    } else {
-      errorHandler(new Error('authorization failed; user does not have access to update'), req, res);
     }
   });
 
 
   //************DELETE************
   //TODO: need to figure out how to remove apis from users favorites
-  router.delete('/api/newApi/:_id', bearerAuth, (req, res) => {
+  router.delete('/api/newApi/:_id', bearerAuth, (req, res, err) => {
     debug('DELETE /api/newApi');
 
-    if(req.user.isAdmin.toString() === true){
+    if(req.user.isAdmin === true){
       return APISupply.findByIdAndRemove(req.params._id)
       // .then(api => {
       //   let api.favorites = x
@@ -95,10 +113,9 @@ module.exports = function(router) {
       //   if(api.favorites.toString() === req.user._id.toString()) return api.remove();
       //   errorHandler(new Error('authorization failed; user does not own api, and cannot delete'), req, res);
       // })
-        .then(() => res.sendStatus(204))
-        .catch(err => errorHandler(err, req, res));
+        .then(() => res.sendStatus(204));
     } else {
-      errorHandler(new Error('authorization failed; user does not have access to update'), req, res);
+      errorHandler(err, req, res);
     }
   });
 };

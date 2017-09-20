@@ -18,8 +18,8 @@ const User = mongoose.Schema({
 });
 
 User.methods.generatePasswordHash = function(password) {
-
   return new Promise((resolve, reject) => {
+    /* istanbul ignore next */
     bcrypt.hash(password, 10, (err, hash) => {
       if(err) return reject(err);
       this.password = hash;
@@ -38,10 +38,8 @@ User.methods.comparePasswordHash = function(password) {
     });
   });
 };
-
+/* istanbul ignore next */
 User.methods.generateFindHash = function() {
-  // unique hash to the user which will help us create a token for further auth'd requests
-
   return new Promise((resolve, reject) => {
     let tries = 0;
 
@@ -53,13 +51,14 @@ User.methods.generateFindHash = function() {
           if(tries > 3) return reject(new Error('authorization failed; could not validate findHash'));
           tries++;
           _generateFindHash();
+          console.log(err.status);
         });
     };
 
     _generateFindHash();
   });
 };
-
+/* istanbul ignore next */
 User.methods.generateToken = function() {
 
   return new Promise((resolve, reject) => {
