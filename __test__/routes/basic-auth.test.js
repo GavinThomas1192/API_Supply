@@ -47,13 +47,25 @@ describe('Testing basic auth routes', function() {
             .then(res => this.res = res);
         });
     });
-    test('should return a token', () => {
+    test('#VALID request should return a token', () => {
       expect(this.res.text).toBeTruthy();
       expect(this.res.text.length > 1).toBeTruthy();
-    });
-    test('should return a status of 200', () => {
       expect(this.res.status).toBe(200);
     });
   });
 
+
+  describe('#INVALID login', function() {
+    test('should return 401 for bad ', () => {
+      return mocks.user.createOne()
+        .then(userData => {
+          this.tempUser = userData.user;
+          return superagent.get(':4444/api/signIn')
+            .auth(userData.user.username, userData.password34)
+            .catch(err => {
+              expect(err.status).toBe(401);
+            });
+        });
+    });
+  });
 });

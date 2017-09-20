@@ -34,31 +34,31 @@ mocks.user.createOne = function() {
     });
 };
 
-mocks.APISupply.createOne = function() {
-
-  return mocks.user.createOne()
-    .then(userData => this.results = userData)
-    .then(userData => {
-      return new APISupply({
-        name: faker.random.word(),
-        desc: faker.random.words(12),
-        examplesOfUse: faker.random.words(12),
-        examplesInUse: faker.random.words(12),
-        rating: faker.random.words(12),
-        tokenRequired: true,
-        tokenAccessWaitTime: '36hrs',
-        maxReqMin: '20',
-        numUsersFav: '3',
-        _category: faker.random.words(12),
-        userId: userData.user._id,
-
-      }).save();
-    })
-    .then(APISupply => {
-      this.results.APISupply = APISupply;
-      return this.results;
-    });
-};
+// mocks.APISupply.createOne = function() {
+//
+//   return mocks.user.createOne()
+//     .then(userData => this.results = userData)
+//     .then(userData => {
+//       return new APISupply({
+//         name: faker.random.word(),
+//         desc: faker.random.words(12),
+//         examplesOfUse: faker.random.words(12),
+//         examplesInUse: faker.random.words(12),
+//         rating: faker.random.words(12),
+//         tokenRequired: true,
+//         tokenAccessWaitTime: '36hrs',
+//         maxReqMin: '20',
+//         numUsersFav: '3',
+//         _category: faker.random.words(12),
+//         userId: userData.user._id,
+//
+//       }).save();
+//     })
+//     .then(APISupply => {
+//       this.results.APISupply = APISupply;
+//       return this.results;
+//     });
+// };
 
 
 mocks.APISupply.removeAll = function() {
