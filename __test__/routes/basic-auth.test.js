@@ -19,7 +19,7 @@ describe('Testing basic auth routes', function() {
         name: 'Madeline',
         username: 'MaddyRocks101',
         password: 'ILoveCodez',
-        email: 'test@test.com',
+        email: 'testtest.com',
         subscribedToEmail: true,
         isAdmin: true,
       };
