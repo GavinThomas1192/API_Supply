@@ -50,7 +50,10 @@ module.exports = function(router) {
 
 
     return APISupply.find()
-      .then(api => res.json(api.map(api => (api))))
+      .then(api => res.json(api.map(api => ({
+        name: api.name,
+        _id: api._id,
+      }))))
       .catch(err => errorHandler(err, req, res));
   });
 
