@@ -24,6 +24,7 @@ describe('Testing basic auth routes', function() {
         isAdmin: true,
       };
 
+
       return superagent.post(':4444/api/signUp')
         .send(this.mockUserData)
         .then(res => this.res = res)
@@ -41,22 +42,18 @@ describe('Testing basic auth routes', function() {
       return mocks.user.createOne()
         .then(userData => {
           this.tempUser = userData.user;
-
           return superagent.get(':4444/api/signIn')
             .auth(userData.user.username, userData.password)
             .then(res => this.res = res);
         });
     });
-
     test('should return a token', () => {
       expect(this.res.text).toBeTruthy();
       expect(this.res.text.length > 1).toBeTruthy();
     });
-
     test('should return a status of 200', () => {
       expect(this.res.status).toBe(200);
     });
   });
-
 
 });
