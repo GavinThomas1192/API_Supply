@@ -132,7 +132,7 @@ _______________
 + Get by Id
 
 
-##### Example route for getAll
+##### Format of getAll route
       https://api-supply.herokuapp.com/api/newapi/getall
 ##### Example auth headers
       Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
@@ -189,7 +189,7 @@ _______________
 
 _______________
 
-##### Example route getAllByCategory format
+##### Format of getAllByCategory route
       https://api-supply.herokuapp.com/api/newapi/getallbycategory/:_category
 
 ##### Example route getAllByCategory with :\_category as a PARAMETER
@@ -295,7 +295,7 @@ _______________
 ##### The SuperUser only can make PUT requests to store API objects into the Mlabs Database.  
 
 
-##### Example route
+##### Format of PUT route
       https://api-supply.herokuapp.com/api/newapi/:_id
       NOTE: The _id refers to the _id in the api object and NOT the userId.
 ##### Example route with :\_id as a PARAMETER
@@ -343,7 +343,7 @@ _______________
 ##### The SuperUser only can make DELETE requests to remove API objects into the Mlabs Database.  
 
 
-##### Example route
+##### Format of DELETE route
       https://api-supply.herokuapp.com/api/newapi/:_id
       NOTE: The _id refers to the _id in the api object and NOT the userId.
 ##### Example route with :\_id as a PARAMETER
