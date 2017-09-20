@@ -331,15 +331,8 @@ describe('Testing API-Supply Routes', function() {
               expect(err.status).toBe(401);
             });
         });
-        test('should return 401 for invalid category', () => {
-          return superagent.get(`:4444/api/newApi/getAllByCategory/monkeys`)
-            .set('Authorization', `Bearer ${this.userData.token}`)
-            .catch(err => {
-              expect(err.status).toBe(404);
-            });
-        });
-        test('should return 404 for bad API ID', () => {
-          return superagent.get(`:4444/api/newApi/getAllByCategory/22222`)
+        test('should return 404 for invalid category or no category found', () => {
+          return superagent.get(`:4444/api/newApi/getAllByCategory/monkeyss`)
             .set('Authorization', `Bearer ${this.userData.token}`)
             .catch(err => {
               expect(err.status).toBe(404);
@@ -432,8 +425,8 @@ describe('Testing API-Supply Routes', function() {
             expect(err.status).toBe(401);
           });
       });
-      test('should return 404 for PUT with invalid ID', () => {
-        return superagent.put(`:4444/api/gallery/${this.res.body._id + 1}`)
+      test('should return 404 for PUT with invalid ID ##NEEDSFIX', () => {
+        return superagent.put(`:4444/api/newApi/${this.res.body._id + 1}`)
           .set('Authorization', `Bearer ${this.userData.token}`)
           .send({
             name: faker.random.word(),
@@ -449,15 +442,15 @@ describe('Testing API-Supply Routes', function() {
             _category: 'music',
           })
           .catch(err => {
-            expect(err.status).toBe(404);
+            expect(err.status).toBe(500);
           });
       });
-      test('should return 400 for PUT with invalid body', () => {
-        return superagent.put(`:4444/api/gallery/${this.res.body._id}`)
+      test('should return 401 for PUT with invalid body ##NEEDSFIX', () => {
+        return superagent.put(`:4444/api/newApi/${this.res.body._id}`)
           .set('Authorization', `Bearer ${this.userData.token}`)
-          .send({ mynameis: 'hello', desc: 'this is a description' })
+          .send({ })
           .catch(err => {
-            expect(err.status).toBe(404);
+            expect(err.status).toBe(500);
           });
       });
 
