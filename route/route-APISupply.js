@@ -12,10 +12,10 @@ module.exports = function(router) {
     debug('POST /api/newApi');
 
     // http POST (auth token) :5000/api/gallery name='my fancy gallery' desc='it be dabomb'
-
+    console.log(req.user);
     req.body.userId = req.user._id;
 
-    if(req.user.isAdmin.toString() === true){
+    if(req.user.isAdmin === true){
       return new APISupply(req.body).save()
         .then(api => res.status(201).json(api))
         .catch(err => errorHandler(err, req, res));
