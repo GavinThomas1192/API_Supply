@@ -9,7 +9,7 @@ This portion of the project is only the back-end infrastructure and functionalit
 
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
-### Project Description
+### Project description
 Using node.js, HTTP, Express, MongoDB, and Mongoose we have created a Server that responds to different GET, POST, PUT, and DELETE responses from a developer, backend position. The requests to our live server can interact with a remote Database created through Mlabs. In this example we use two schemas- Users and APIs. There are two types of Users, SuperUser and User. Only the SuperUser can POST, PUT, and DELETE. This project represents what is possible with a few simple tools.
 
 ### About the Team
@@ -18,10 +18,10 @@ Using node.js, HTTP, Express, MongoDB, and Mongoose we have created a Server tha
 * [Gavin Thomas](https://github.com/GavinThomas1192)
 
 ### Table of Contents
-+ [Flowchart](#Flowchart)
-+ [Installation](#Installation)
-+ [Routes](#Routes)
-+ [Resources](#Resources)
++ [Flowchart](#flowchart)
++ [Installation](#installation)
++ [Routes](#routes)
++ [Resources](#resources)
 
 ### Flowchart
 This flowchart will help visualize our requests, our routes and our endpoints.
@@ -40,13 +40,13 @@ _________________
 
 ### SignUp
 #### POST
-##### First you must Sign Up for an account with a POST request to receive an authentication token associated with your account. You can create a SuperUser, who has access to all CRUD operations by assigning a key/value `"isAdmin": true;` vs every other user who should be `"isAdmin": false;`.
+##### First you must Sign Up for an account with a POST request to receive an authentication token associated with your account.
 
 
 
-##### Example Route
+##### Example route
       https://api-supply.herokuapp.com/api/signup
-##### Example Request Body
+##### Example request body
       {
       "username": "Gavin",
       "name": "Thomas",
@@ -55,8 +55,9 @@ _________________
       "subscribedToEmail": "true",
       "isAdmin": "true"
       }
+      NOTE: You can create a SuperUser, who has access to all CRUD operations by assigning a key/value "isAdmin": true; vs every other user who should be "isAdmin": false;.
 
-##### Example Response Body
+##### Example response body
       eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
 _________________
 
@@ -65,7 +66,7 @@ _________________
 ##### In addition to signing up, you can make a GET request to sign in for returning users. This will generate a new Authorization Token to be used during that User's session.  
 
 
-##### Example Route
+##### Example route
       https://api-supply.herokuapp.com/api/signin
 ##### Example Basic Auth
       {
@@ -73,7 +74,7 @@ _________________
       "password": "1234",
       }
 
-##### Example Response Body
+##### Example response Body
       eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
 
 _______________
@@ -82,12 +83,12 @@ _______________
 ##### The SuperUser only can make POST requests to store API objects into the Mlabs Database.  
 
 
-##### Example Route
+##### Example route
       https://api-supply.herokuapp.com/api/newapi
-##### Example Auth Headers
+##### Example auth headers
       Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
 
-##### Example Request Body
+##### Example request body
       {
         "name": "Unsplash",
         "url": "https://unsplash.com/developers",
@@ -99,11 +100,11 @@ _______________
         "tokenAccessWaitTime": "Initially, your application will be in development mode and will be rate-limited to 50 requests per hour. When ready for production, upload screenshots of your application (focusing on the proper attribution and use of Unsplash photos in your app), then click the “Request Approval” button. If approved, your rate limit will be increased to the full amount.",
         "maxReqMin": "50 requests per hour",
         "numUsersFav": "0",
-        "_category": "Photo"
+        "_category": "photo"
       }
 
 
-##### Example Response Body
+##### Example response Body
       {
           "__v": 0,
           "updatedAt": "2017-09-20T19:58:08.343Z",
@@ -118,7 +119,7 @@ _______________
           "tokenAccessWaitTime": "Initially, your application will be in development mode and will be rate-limited to 50 requests per hour. When ready for production, upload screenshots of your application (focusing on the proper attribution and use of Unsplash photos in your app), then click the “Request Approval” button. If approved, your rate limit will be increased to the full amount.",
           "maxReqMin": "50 requests per hour",
           "numUsersFav": "0",
-          "_category": "Photo",
+          "_category": "photo",
           "userId": "59c2a7653e80cc0012de07d7",
           "_id": "59c2c85098d3000012c9f0b6"
       }
@@ -131,40 +132,180 @@ _______________
 + Get by Id
 
 
-##### Example Route for GetAll
+##### Example route for getAll
       https://api-supply.herokuapp.com/api/newapi/getall
-##### Example Auth Headers
+##### Example auth headers
       Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
 
-##### Example Response Body
+##### Example response body
       [
-      "59c2a7cf3e80cc0012de07d8",
-      "59c2c78798d3000012c9f0b0",
-      "59c2c7e398d3000012c9f0b1",
-      "59c2c80598d3000012c9f0b2",
-      "59c2c80998d3000012c9f0b3",
-      "59c2c83598d3000012c9f0b4",
-      "59c2c84898d3000012c9f0b5",
-      "59c2c85098d3000012c9f0b6",
-      "59c2c86e98d3000012c9f0b7",
-      "59c2c8a098d3000012c9f0b8",
-      "59c2c8b698d3000012c9f0b9"
+      {
+          "name": "last.fm",
+          "_id": "59c2c7e398d3000012c9f0b1"
+      },
+      {
+          "name": "OMDb",
+          "_id": "59c2c80598d3000012c9f0b2"
+      },
+      {
+          "name": "Fitbit",
+          "_id": "59c2c80998d3000012c9f0b3"
+      },
+      {
+          "name": "The Movie DB",
+          "_id": "59c2c83598d3000012c9f0b4"
+      },
       ]
+
+_______________
+##### Format Of getAllById route
+      https://api-supply.herokuapp.com/api/newapi/getallbyid/:_id
+
+##### Example route getAllById with :\_id sent as a PARAMETER
+      https://api-supply.herokuapp.com/api/newapi/getallbyid/59c2c80598d3000012c9f0b2
+##### Example auth headers
+      Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+
+##### Example response body
+      {
+      "_id": "59c2c80598d3000012c9f0b2",
+      "updatedAt": "2017-09-20T19:56:53.941Z",
+      "createdAt": "2017-09-20T19:56:53.941Z",
+      "name": "OMDb",
+      "url": "http://www.omdbapi.com/",
+      "desc": "The OMDb API is a RESTful web service to obtain movie information, all content and images on the site are contributed and maintained by our users. ",
+      "examplesOfUse": "Random Movie Generator, Movie Tinder, Personality test based on favorite movies",
+      "examplesInUse": "https://github.com/Omertron/api-omdb, https://github.com/misterhat/omdb",
+      "rating": "Average",
+      "tokenRequired": true,
+      "tokenAccessWaitTime": "You must submit your email to recieve a key within 5 hours.",
+      "maxReqMin": "Unknown",
+      "numUsersFav": "0",
+      "_category": "Film",
+      "userId": "59c2a7653e80cc0012de07d7",
+      "__v": 0
+      }
 
 
 _______________
 
-##### Example Route GetAllByCategory format
+##### Example route getAllByCategory format
       https://api-supply.herokuapp.com/api/newapi/getallbycategory/:_category
 
-##### Example Route GetAllByCategory with example category
+##### Example route getAllByCategory with :\_category as a PARAMETER
       https://api-supply.herokuapp.com/api/newapi/getallbycategory/sports
-##### Example Auth Headers
+##### Example auth headers
       Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
 
-##### Example Request Body
+##### Example response body
+      [
       {
-        "name": "Unsplash",
+        "_id": "59c2c80998d3000012c9f0b3",
+        "updatedAt": "2017-09-20T19:56:57.611Z",
+        "createdAt": "2017-09-20T19:56:57.611Z",
+        "name": "Fitbit",
+        "url": "https://dev.fitbit.com/",
+        "desc": "As describe, \"The Fitbit Web API enables third-party applications to access and write data on behalf of users.\" Requires the use of fitbit studio.",
+        "examplesOfUse": "personalized fitness apps",
+        "examplesInUse": "https://github.com/pugwonk/FitbitAndroidSample",
+        "rating": "mvp",
+        "tokenRequired": false,
+        "tokenAccessWaitTime": "Instant via OAuth",
+        "maxReqMin": "150/hour w/o token || 150/hour for each user that has authorized your application for their data via token",
+        "numUsersFav": "0",
+        "_category": "sports",
+        "userId": "59c2aaa33e80cc0012de07da",
+        "__v": 0
+      },
+      {
+        "_id": "59c2c84898d3000012c9f0b5",
+        "updatedAt": "2017-09-20T19:58:00.213Z",
+        "createdAt": "2017-09-20T19:58:00.213Z",
+        "name": "Sportradar",
+        "url": "https://developer.sportradar.us/",
+        "desc": "Provides real time sports data.",
+        "examplesOfUse": "Real time sports analytics",
+        "examplesInUse": "sportxts",
+        "rating": "Awesome",
+        "tokenRequired": true,
+        "tokenAccessWaitTime": "Upon application review",
+        "maxReqMin": "1000 per 30days || token expires after 90 days",
+        "numUsersFav": "0",
+        "_category": "sports",
+        "userId": "59c2aaa33e80cc0012de07da",
+        "__v": 0
+      },
+      {
+        "_id": "59c2c86e98d3000012c9f0b7",
+        "updatedAt": "2017-09-20T19:58:38.117Z",
+        "createdAt": "2017-09-20T19:58:38.117Z",
+        "name": "ESPN",
+        "url": "http://www.espn.com/apis/devcenter/",
+        "desc": "Provide a variety of API data to choose from. Well worth checking out.",
+        "examplesOfUse": "Real time sports analytics",
+        "examplesInUse": "Sports game or sports analytics app",
+        "rating": "Awesome",
+        "tokenRequired": true,
+        "tokenAccessWaitTime": "Upon registering",
+        "maxReqMin": "It Depends on consumer tier",
+        "numUsersFav": "0",
+        "_category": "sports",
+        "userId": "59c2aaa33e80cc0012de07da",
+        "__v": 0
+      },
+      {
+        "_id": "59c2c8a098d3000012c9f0b8",
+        "updatedAt": "2017-09-20T19:59:28.390Z",
+        "createdAt": "2017-09-20T19:59:28.390Z",
+        "name": "Nike Plus API",
+        "url": "https://developer.nike.com",
+        "desc": "Developers can use the API to access the raw data of their workout. It uses RESTful calls and responses are formatted in XML.",
+        "examplesOfUse": "Personal fitness app",
+        "examplesInUse": "https://github.com/mnmly/nike-plus-api",
+        "rating": "Awesome",
+        "tokenRequired": true,
+        "tokenAccessWaitTime": "You recieve one on signup",
+        "maxReqMin": "unknown",
+        "numUsersFav": "0",
+        "_category": "sports",
+        "userId": "59c2aaa33e80cc0012de07da",
+        "__v": 0
+      },
+      {
+        "_id": "59c2c8b698d3000012c9f0b9",
+        "updatedAt": "2017-09-20T19:59:50.958Z",
+        "createdAt": "2017-09-20T19:59:50.958Z",
+        "name": "Yahoo Fantasy Sports",
+        "url": "https://developer.yahoo.com/fantasysports/",
+        "desc": "Sports data that, can be used to build non-commercial tools and applications that help analyze draft results, review free agents, optimize current rosters, or other apps The Yahoo Fantasy Sports API utilizes the Yahoo Query Language (YQL) as a mechanism to access Yahoo Fantasy Sports data, returning data in XML and JSON formats.",
+        "examplesOfUse": "sports data analytics",
+        "examplesInUse": "https://github.com/philip/YahooFantasySportsAPI",
+        "rating": "Awesome",
+        "tokenRequired": true,
+        "tokenAccessWaitTime": "upon application review",
+        "maxReqMin": "3333",
+        "numUsersFav": "0",
+        "_category": "sports",
+        "userId": "59c2aaa33e80cc0012de07da",
+        "__v": 0
+      }
+      ]
+_______________
+### PUT
+##### The SuperUser only can make PUT requests to store API objects into the Mlabs Database.  
+
+
+##### Example route
+      https://api-supply.herokuapp.com/api/newapi/:_id
+      NOTE: The _id refers to the _id in the api object and NOT the userId.
+##### Example route with :\_id as a PARAMETER
+      https://api-supply.herokuapp.com/api/newapi/59c2c8b698d3000012c9f0b9
+##### Example auth headers
+      Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+
+##### Example request body
+      {
+        "name": "Different Title",
         "url": "https://unsplash.com/developers",
         "desc": "Build powerful photo apps with free high definition images from Unsplash",
         "examplesOfUse": "Random background image change, Memory game with random images",
@@ -174,16 +315,16 @@ _______________
         "tokenAccessWaitTime": "Initially, your application will be in development mode and will be rate-limited to 50 requests per hour. When ready for production, upload screenshots of your application (focusing on the proper attribution and use of Unsplash photos in your app), then click the “Request Approval” button. If approved, your rate limit will be increased to the full amount.",
         "maxReqMin": "50 requests per hour",
         "numUsersFav": "0",
-        "_category": "Photo"
+        "_category": "photo"
       }
 
 
-##### Example Response Body
+##### Example response Body
       {
           "__v": 0,
           "updatedAt": "2017-09-20T19:58:08.343Z",
           "createdAt": "2017-09-20T19:58:08.343Z",
-          "name": "Unsplash",
+          "name": "Different Title",
           "url": "https://unsplash.com/developers",
           "desc": "Build powerful photo apps with free high definition images from Unsplash",
           "examplesOfUse": "Random background image change, Memory game with random images",
@@ -193,59 +334,26 @@ _______________
           "tokenAccessWaitTime": "Initially, your application will be in development mode and will be rate-limited to 50 requests per hour. When ready for production, upload screenshots of your application (focusing on the proper attribution and use of Unsplash photos in your app), then click the “Request Approval” button. If approved, your rate limit will be increased to the full amount.",
           "maxReqMin": "50 requests per hour",
           "numUsersFav": "0",
-          "_category": "Photo",
+          "_category": "photo",
           "userId": "59c2a7653e80cc0012de07d7",
           "_id": "59c2c85098d3000012c9f0b6"
       }
 _______________
-#### User GET/signin requests
-+ Example.==>`http GET localhost:3000/api/signin username:password`
-+ Example w/ Mock ID ==> `http GET localhost:3000/api/signin/gavinator:35353`
-+ Also from the the second terminal window you can make a series of GET, POST, PUT, and DELETE requests for database APIs.
-#### API POST
-+ Example ==>`http POST localhost:3000/api/gallery name=name desc=password`
-+ Example w/ Mock info ==> `http POST localhost:3000/api/gallery name=Gavinator desc=35353`
-#### API GET
-+ Example.==>`http GET localhost:3000/api/gallery/_id:`
-+ Example w/ Mock ID ==> `http GET localhost:3000/api/gallery/377448883737262`
-#### Gallery GETALL
-+ Example.==>`http GET localhost:3000/api/gallery`
-+ Example w/ Mock ID ==> `http GET localhost:3000/api/gallery`
-#### Gallery PUT
-+ Example.==>`http GET localhost:3000/api/gallery/_id: name:name desc=desc`
-+ Example w/ Mock ID ==> `http PUT localhost:3000/api/gallery/3384748484 name:Moana desc=pilot`
-#### Gallery DELETE
-+ Example.==>`http GET localhost:3000/api/gallery/_id:`
-+ Example w/ Mock ID ==> `http GET localhost:3000/api/gallery/484747483`
-<!-- ## Example Requests
-* **POST /api/toy** (requires bearer auth token)
-`https://localhost:8080/api/toy`
-```js
-<!-- Example Body -->
-<!-- {
-"name": "barney,
-"desc": "purple dino"
-} -->
-+ Also from the the second terminal window you can make a series of GET, POST, PUT, and DELETE requests to upload a photo.
-### All routes require an AUTH token which you recieve on signup/signin
-#### Photo POST
-+ Example ==>`http POST localhost:3000/api/photo image name desc galleryId`
-+ Example w/ Mock info ==> `http POST localhost:3000/api/photo image=directPathToImage.png name=TestImage desc=TestImageDesc galleryId=3766474738822`
-#### Photo GET
-+ Example.==>`http GET localhost:3000/api/photo/_id:`
-+ Example w/ Mock ID ==> `http GET localhost:3000/api/photo/377448883737262`
-#### Photo GETALL
-+ Example.==>`http GET localhost:3000/api/photo`
-+ Example w/ Mock ID ==> `http GET localhost:3000/api/photo`
-#### Photo PUT
-+ Example.==>`http GET localhost:3000/api/photo/_id: image= name= desc= galleryId=`
-+ Example w/ Mock ID ==> `http PUT localhost:3000/api/photo/3384748484 image=directPathToImage.png name=TestImage desc=TestImageDesc galleryId=3766474738822`
-#### Photo DELETE
-+ Example.==>`http GET localhost:3000/api/photo/_id:`
-+ Example w/ Mock ID ==> `http GET localhost:3000/api/photo/484747483 objectKey=23452345fsdg userId=afdgsfdg3454`
-<!-- ```
-for code blocks
-``` -->
+### DELETE
+##### The SuperUser only can make DELETE requests to remove API objects into the Mlabs Database.  
+
+
+##### Example route
+      https://api-supply.herokuapp.com/api/newapi/:_id
+      NOTE: The _id refers to the _id in the api object and NOT the userId.
+##### Example route with :\_id as a PARAMETER
+      https://api-supply.herokuapp.com/api/newapi/59c2c8b698d3000012c9f0b9
+##### Example auth headers
+      Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+
+```NOTE: Upon successful request expect a 204```
+_______________
+
 + If you want to interact with your database through mongo and mongoose...
 + In your fourth terminal window you can use the following commands.
 + `show collections`
