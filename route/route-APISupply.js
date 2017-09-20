@@ -11,8 +11,7 @@ module.exports = function(router) {
   router.post('/api/newApi', bearerAuth, jsonParser, (req, res) => {
     debug('POST /api/newApi');
 
-    // http POST (auth token) :5000/api/gallery name='my fancy gallery' desc='it be dabomb'
-    console.log(req.user);
+
     req.body.userId = req.user._id;
 
     if(req.user.isAdmin === true){
@@ -52,7 +51,10 @@ module.exports = function(router) {
   router.put('/api/newApi/:_id', bearerAuth, jsonParser, (req, res) => {
     debug('PUT /api/newApi');
 
-    if(req.user.isAdmin.toString() === true){
+
+    console.log(req.user.isAdmin);
+    if(req.user.isAdmin === true){
+      console.log(req.user.isAdmin);
       return APISupply.findById(req.params._id)
         .then(api => {
           if(api.userId.toString() === req.user._id.toString()) {
