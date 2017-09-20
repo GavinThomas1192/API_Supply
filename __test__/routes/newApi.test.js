@@ -287,7 +287,15 @@ describe('Testing API-Supply Routes', function() {
         return superagent.get(`:4444/api/newApi/getAllByCategory/${this.res.body._category}`)
           .set('Authorization', `Bearer ${this.userData.token}`)
           .then(res => {
+            expect(res.body.name).toBe(this.res.name);
             expect(res.status).toBe(200);
+          });
+      });
+      test('should return correct name for valid GET by Category', () => {
+        return superagent.get(`:4444/api/newApi/getAllByCategory/${this.res.body._category}`)
+          .set('Authorization', `Bearer ${this.userData.token}`)
+          .then(res => {
+            expect(res.body.name).toBe(this.res.name);
           });
       });
 
@@ -321,6 +329,13 @@ describe('Testing API-Supply Routes', function() {
             .set('Authorization', `Bearer ${this.userData.token} + 1`)
             .catch(err => {
               expect(err.status).toBe(401);
+            });
+        });
+        test('should return 401 for invalid category', () => {
+          return superagent.get(`:4444/api/newApi/getAllByCategory/monkeys`)
+            .set('Authorization', `Bearer ${this.userData.token}`)
+            .catch(err => {
+              expect(err.status).toBe(404);
             });
         });
         test('should return 404 for bad API ID', () => {
@@ -450,58 +465,83 @@ describe('Testing API-Supply Routes', function() {
   });
 
   // //****************DELETEBYID****************
-  // describe('DELETE to /api/newApi', function() {
-  //   describe('Valid Requests to DELETE', () => {
-  //     beforeAll(() => {
-  //       this.APISupply = { name: faker.random.word(), url: faker.internet.url(), desc: faker.random.words(12), examplesOfUse: faker.lorem.words(), examplesInUse: faker.internet.url(), rating: 'poor', tokenRequired: 'yes', tokenAccessWaitTime: '36hrs', maxReqMin: '20', numUsersFav: '3', category: 'music' };
-  //
-  //       return mocks.user.createOne()
-  //         .then(userData => this.userData = userData)
-  //         .then(() => {
-  //           return superagent.post(':4444/api/newApi')
-  //             .set('Authorization', `Bearer ${this.userData.token}`)
-  //             .send(this.APISupply);
-  //         })
-  //         .then(res => this.res = res);
-  //     });
-  //     test('should return 204 for valid delete', () => {
-  //       return superagent.delete(`:4444/api/newApi/${this.res.body._id}`)
-  //         .set('Authorization', `Bearer ${this.userData.token}`)
-  //         .then(res => {
-  //           expect(res.status).toBe(204);
-  //         });
-  //     });
-  //
-  //   });
-  //
-  //   describe('Invalid Requests to DELETE', () => {
-  //     beforeAll(() => {
-  //       this.APISupply = { name: faker.random.word(), url: faker.internet.url(), desc: faker.random.words(12), examplesOfUse: faker.lorem.words(), examplesInUse: faker.internet.url(), rating: 'poor', tokenRequired: 'yes', tokenAccessWaitTime: '36hrs', maxReqMin: '20', numUsersFav: '3', category: 'music' };
-  //
-  //       return mocks.user.createOne()
-  //         .then(userData => this.userData = userData)
-  //         .then(() => {
-  //           return superagent.post(':4444/api/newApi')
-  //             .set('Authorization', `Bearer ${this.userData.token}`)
-  //             .send(this.APISupply);
-  //         })
-  //         .then(res => this.res = res);
-  //     });
-  //     test('should return xxx for invalid ID', () => {
-  //       return superagent.delete(`:4444/api/gallery/${this.res.body._id + 1}`)
-  //         .set('Authorization', `Bearer ${this.userData.token}`)
-  //         .then(res => {
-  //           expect(res.status).toBe(204);
-  //         });
-  //     });
-  //     test('should return xxx for invalid token', () => {
-  //       return superagent.delete(`:4444/api/gallery/${this.res.body._id}`)
-  //         .set('Authorization', `Bearer ${this.userData.token + 1}`)
-  //         .then(res => {
-  //           expect(res.status).toBe(204);
-  //         });
-  //     });
-  //
-  //   });
-  // });
+  describe('DELETE to /api/newApi', function() {
+    describe('Valid Requests to DELETE', () => {
+      beforeAll(() => {
+        this.APISupply = this.APISupply = {
+          name: faker.random.word(),
+          url: faker.internet.url(),
+          desc: faker.random.words(12),
+          examplesOfUse: faker.lorem.words(),
+          examplesInUse: faker.internet.url(),
+          rating: 'poor',
+          tokenRequired: 'yes',
+          tokenAccessWaitTime: '36hrs',
+          maxReqMin: '20',
+          numUsersFav: '3',
+          _category: 'music',
+        };
+
+        return mocks.user.createOne()
+          .then(userData => this.userData = userData)
+          .then(() => {
+            return superagent.post(':4444/api/newApi')
+              .set('Authorization', `Bearer ${this.userData.token}`)
+              .send(this.APISupply);
+          })
+          .then(res => this.res = res);
+      });
+      test('should return 204 for valid delete', () => {
+        return superagent.delete(`:4444/api/newApi/${this.res.body._id}`)
+          .set('Authorization', `Bearer ${this.userData.token}`)
+          .then(res => {
+            expect(res.status).toBe(204);
+          });
+      });
+
+    });
+
+    describe('Invalid Requests to DELETE', () => {
+      beforeAll(() => {
+        this.APISupply = this.APISupply = {
+          name: faker.random.word(),
+          url: faker.internet.url(),
+          desc: faker.random.words(12),
+          examplesOfUse: faker.lorem.words(),
+          examplesInUse: faker.internet.url(),
+          rating: 'poor',
+          tokenRequired: 'yes',
+          tokenAccessWaitTime: '36hrs',
+          maxReqMin: '20',
+          numUsersFav: '3',
+          _category: 'music',
+        };
+
+        return mocks.user.createOne()
+          .then(userData => this.userData = userData)
+          .then(() => {
+            return superagent.post(':4444/api/newApi')
+              .set('Authorization', `Bearer ${this.userData.token}`)
+              .send(this.APISupply);
+          })
+          .then(res => this.res = res);
+      });
+      test('should return 404 for invalid ID', () => {
+        return superagent.delete(`:4444/api/gallery/${this.res.body._id + 1}`)
+          .set('Authorization', `Bearer ${this.userData.token}`)
+          .catch(err => {
+            expect(err.status).toBe(404);
+          });
+      });
+      test('should return 401 for invalid token', () => {
+        return superagent.delete(`:4444/api/gallery/${this.res.body._id}`)
+          .set('Authorization', `Bearer 33335`)
+          .catch(err => {
+            // console.log(err);
+            expect(err.status).toBe(404);
+          });
+      });
+
+    });
+  });
 });

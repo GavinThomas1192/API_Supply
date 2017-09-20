@@ -18,8 +18,6 @@ module.exports = function(router) {
       return new APISupply(req.body).save()
         .then(api => res.status(201).json(api))
         .catch(err => errorHandler(err, req, res));
-    } else {
-      errorHandler(new Error('authorization failed; user does not have access to update'), req, res);
     }
   });
   //************GET************
@@ -35,6 +33,23 @@ module.exports = function(router) {
     debug('GET /api/newApi/:_category');
 
     return APISupply.find({ 'category': req.params._category})
+
+    // jwt.verify(token, process.env.APP_SECRET, (err, decoded) => {
+    //   if(err) {
+    //     err.message = 'authorization failed; token not verified';
+    //     return errorHandler(err, req, res);
+    //   }
+    //
+    //   User.findOne({ findHash: decoded.token })
+    //     .then(user => {
+    //       // delete user.password;
+    //       req.user = user;
+    //       next();
+    //       //send off to isadmin middleware to be written
+    //     })
+    //     .catch(err => errorHandler(err, req, res));
+    // });
+    //NEED TO VERIFY THAT API ISN'T AN EMPTY ARRAY
       .then(api => res.json(api))
       .catch(err => errorHandler(err, req, res));
   });
@@ -73,22 +88,19 @@ module.exports = function(router) {
 
             return api.save();
           }
-          errorHandler(new Error('authorization failed; user does not have access to update'), req, res);
         })
         .then(() => res.sendStatus(204))
         .catch(err => errorHandler(err, req, res));
-    } else {
-      errorHandler(new Error('authorization failed; user does not have access to update'), req, res);
     }
   });
 
 
   //************DELETE************
   //TODO: need to figure out how to remove apis from users favorites
-  router.delete('/api/newApi/:_id', bearerAuth, (req, res) => {
+  router.delete('/api/newApi/:_id', bearerAuth, (req, res, err) => {
     debug('DELETE /api/newApi');
 
-    if(req.user.isAdmin.toString() === true){
+    if(req.user.isAdmin === true){
       return APISupply.findByIdAndRemove(req.params._id)
       // .then(api => {
       //   let api.favorites = x
@@ -97,10 +109,9 @@ module.exports = function(router) {
       //   if(api.favorites.toString() === req.user._id.toString()) return api.remove();
       //   errorHandler(new Error('authorization failed; user does not own api, and cannot delete'), req, res);
       // })
-        .then(() => res.sendStatus(204))
-        .catch(err => errorHandler(err, req, res));
+        .then(() => res.sendStatus(204));
     } else {
-      errorHandler(new Error('authorization failed; user does not have access to update'), req, res);
+      errorHandler(err, req, res);
     }
   });
 };
