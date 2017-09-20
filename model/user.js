@@ -53,6 +53,7 @@ User.methods.generateFindHash = function() {
           if(tries > 3) return reject(new Error('authorization failed; could not validate findHash'));
           tries++;
           _generateFindHash();
+          console.log(err.status);
         });
     };
 
