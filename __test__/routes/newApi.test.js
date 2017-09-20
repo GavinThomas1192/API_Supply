@@ -170,8 +170,9 @@ describe('Testing API-Supply Routes', function() {
       });
       test('should return 401 for bad token', () => {
         return superagent.get(':4444/api/newApi/getAll')
-          .then(res => {
-            expect(res.status).toBe(401);
+          .set('Authorization', `Bearer ${this.userData.token} + 1`)
+          .catch(err => {
+            expect(err.status).toBe(401);
           });
       });
     });
@@ -240,15 +241,15 @@ describe('Testing API-Supply Routes', function() {
         test('should return 401 for bad token', () => {
           return superagent.get(`:4444/api/newApi/getAllById/${this.res.body._id}`)
             .set('Authorization', `Bearer ${this.userData.token} + 1`)
-            .then(res => {
-              expect(res.status).toBe(401);
+            .catch(err => {
+              expect(err.status).toBe(401);
             });
         });
         test('should return 404 for bad API ID', () => {
           return superagent.get(`:4444/api/newApi/getAllById/22222`)
             .set('Authorization', `Bearer ${this.userData.token}`)
-            .then(res => {
-              expect(res.status).toBe(404);
+            .catch(err => {
+              expect(err.status).toBe(404);
             });
         });
       });
@@ -318,15 +319,15 @@ describe('Testing API-Supply Routes', function() {
         test('should return 401 for bad token', () => {
           return superagent.get(`:4444/api/newApi/getAllByCategory/${this.res.body._category}`)
             .set('Authorization', `Bearer ${this.userData.token} + 1`)
-            .then(res => {
-              expect(res.status).toBe(401);
+            .catch(err => {
+              expect(err.status).toBe(401);
             });
         });
         test('should return 404 for bad API ID', () => {
           return superagent.get(`:4444/api/newApi/getAllByCategory/22222`)
             .set('Authorization', `Bearer ${this.userData.token}`)
-            .then(res => {
-              expect(res.status).toBe(404);
+            .catch(err => {
+              expect(err.status).toBe(404);
             });
         });
       });
@@ -334,78 +335,120 @@ describe('Testing API-Supply Routes', function() {
   });
 
   // //****************PUTBYID****************
-  // describe('PUT to /api/newApi', function() {
-  //   describe('Valid Requests to PUT', () => {
-  //     beforeAll(() => {
-  //       this.APISupply = { name: faker.random.word(), url: faker.internet.url(), desc: faker.random.words(12), examplesOfUse: faker.lorem.words(), examplesInUse: faker.internet.url(), rating: 'poor', tokenRequired: 'yes', tokenAccessWaitTime: '36hrs', maxReqMin: '20', numUsersFav: '3', category: 'music' };
-  //
-  //       return mocks.user.createOne()
-  //         .then(userData => this.userData = userData)
-  //         .then(() => {
-  //           return superagent.post(':4444/api/newApi')
-  //             .set('Authorization', `Bearer ${this.userData.token}`)
-  //             .send(this.APISupply);
-  //         })
-  //         .then(res => this.res = res);
-  //     });
-  //     test('should return 204 for PUT with valid info', () => {
-  //       return superagent.put(`:4444/api/newApi/${this.res.body._id}`)
-  //         .set('Authorization', `Bearer ${this.userData.token}`)
-  //         .send({
-  //           name: faker.random.word(), url: faker.internet.url(), desc: faker.random.words(12), examplesOfUse: faker.lorem.words(), examplesInUse: faker.internet.url(), rating: 'awesome', tokenRequired: 'yes', tokenAccessWaitTime: '36hrs', maxReqMin: '20', numUsersFav: '3', category: 'entertainment',
-  //         })
-  //         .then(res => {
-  //           expect(res.status).toBe(204);
-  //         });
-  //     });
-  //
-  //   });
-  //
-  //   describe('Invalid Requests to PUT ', () => {
-  //     beforeAll(() => {
-  //       this.APISupply = { name: faker.random.word(), url: faker.internet.url(), desc: faker.random.words(12), examplesOfUse: faker.lorem.words(), examplesInUse: faker.internet.url(), rating: 'poor', tokenRequired: 'yes', tokenAccessWaitTime: '36hrs', maxReqMin: '20', numUsersFav: '3', category: 'music' };
-  //
-  //       return mocks.user.createOne()
-  //         .then(userData => this.userData = userData)
-  //         .then(() => {
-  //           return superagent.post(':4444/api/newApi')
-  //             .set('Authorization', `Bearer ${this.userData.token}`)
-  //             .send(this.APISupply);
-  //         })
-  //         .then(res => this.res = res);
-  //     });
-  //     test('should return 401 for PUT with invalid token', () => {
-  //       return superagent.put(`:4444/api/newApi/${this.res.body._id}`)
-  //         .set('Authorization', `Bearer ${this.userData.token + 1}`)
-  //         .send({
-  //           name: faker.random.word(), url: faker.internet.url(), desc: faker.random.words(12), examplesOfUse: faker.lorem.words(), examplesInUse: faker.internet.url(), rating: 'awesome', tokenRequired: 'yes', tokenAccessWaitTime: '36hrs', maxReqMin: '20', numUsersFav: '3', category: 'entertainment',
-  //         })
-  //         .then(res => {
-  //           expect(res.status).toBe(401);
-  //         });
-  //     });
-  //     test('should return 404 for PUT with invalid ID', () => {
-  //       return superagent.put(`:4444/api/gallery/${this.res.body._id + 1}`)
-  //         .set('Authorization', `Bearer ${this.userData.token}`)
-  //         .send({
-  //           name: faker.random.word(), url: faker.internet.url(), desc: faker.random.words(12), examplesOfUse: faker.lorem.words(), examplesInUse: faker.internet.url(), rating: 'awesome', tokenRequired: 'yes', tokenAccessWaitTime: '36hrs', maxReqMin: '20', numUsersFav: '3', category: 'entertainment',
-  //         })
-  //         .then(res => {
-  //           expect(res.status).toBe(404);
-  //         });
-  //     });
-  //     test('should return 400 for PUT with invalid body', () => {
-  //       return superagent.put(`:4444/api/gallery/${this.res.body._id}`)
-  //         .set('Authorization', `Bearer ${this.userData.token}`)
-  //         .send({ mynameis: 'hello', desc: 'this is a description' })
-  //         .then(res => {
-  //           expect(res.status).toBe(400);
-  //         });
-  //     });
-  //
-  //   });
-  // });
-  //
+  describe('PUT to /api/newApi', function() {
+    describe('Valid Requests to PUT', () => {
+      beforeAll(() => {
+        this.APISupply = {
+          name: faker.random.word(),
+          url: faker.internet.url(),
+          desc: faker.random.words(12),
+          examplesOfUse: faker.lorem.words(),
+          examplesInUse: faker.internet.url(),
+          rating: 'poor',
+          tokenRequired: 'yes',
+          tokenAccessWaitTime: '36hrs',
+          maxReqMin: '20',
+          numUsersFav: '3',
+          _category: 'music',
+        };
+        return mocks.user.createOne()
+          .then(userData => this.userData = userData)
+          .then(() => {
+            return superagent.post(':4444/api/newApi')
+              .set('Authorization', `Bearer ${this.userData.token}`)
+              .send(this.APISupply);
+          })
+          .then(res => this.res = res);
+      });
+      test('should return 204 for PUT with valid info', () => {
+        return superagent.put(`:4444/api/newApi/${this.res.body._id}`)
+          .set('Authorization', `Bearer ${this.userData.token}`)
+          .send({
+            name: faker.random.word(),
+            url: faker.internet.url(),
+            desc: faker.random.words(12),
+            examplesOfUse: faker.lorem.words(),
+            examplesInUse: faker.internet.url(),
+            rating: 'poor',
+            tokenRequired: 'yes',
+            tokenAccessWaitTime: '36hrs',
+            maxReqMin: '20',
+            numUsersFav: '3',
+            _category: 'music',
+          })
+          .then(res => {
+            expect(res.status).toBe(204);
+          });
+      });
+
+    });
+
+    describe('Invalid Requests to PUT ', () => {
+      beforeAll(() => {
+        this.APISupply = this.APISupply = {
+          name: faker.random.word(),
+          url: faker.internet.url(),
+          desc: faker.random.words(12),
+          examplesOfUse: faker.lorem.words(),
+          examplesInUse: faker.internet.url(),
+          rating: 'poor',
+          tokenRequired: 'yes',
+          tokenAccessWaitTime: '36hrs',
+          maxReqMin: '20',
+          numUsersFav: '3',
+          _category: 'music',
+        };
+        return mocks.user.createOne()
+          .then(userData => this.userData = userData)
+          .then(() => {
+            return superagent.post(':4444/api/newApi')
+              .set('Authorization', `Bearer ${this.userData.token}`)
+              .send(this.APISupply);
+          })
+          .then(res => this.res = res);
+      });
+      test('should return 401 for PUT with invalid token', () => {
+        return superagent.put(`:4444/api/newApi/${this.res.body._id}`)
+          .set('Authorization', `Bearer ${this.userData.token + 1}`)
+          .send({
+            name: faker.random.word(), url: faker.internet.url(), desc: faker.random.words(12), examplesOfUse: faker.lorem.words(), examplesInUse: faker.internet.url(), rating: 'awesome', tokenRequired: 'yes', tokenAccessWaitTime: '36hrs', maxReqMin: '20', numUsersFav: '3', category: 'entertainment',
+          })
+          .catch(err => {
+            expect(err.status).toBe(401);
+          });
+      });
+      test('should return 404 for PUT with invalid ID', () => {
+        return superagent.put(`:4444/api/gallery/${this.res.body._id + 1}`)
+          .set('Authorization', `Bearer ${this.userData.token}`)
+          .send({
+            name: faker.random.word(),
+            url: faker.internet.url(),
+            desc: faker.random.words(12),
+            examplesOfUse: faker.lorem.words(),
+            examplesInUse: faker.internet.url(),
+            rating: 'poor',
+            tokenRequired: 'yes',
+            tokenAccessWaitTime: '36hrs',
+            maxReqMin: '20',
+            numUsersFav: '3',
+            _category: 'music',
+          })
+          .catch(err => {
+            expect(err.status).toBe(404);
+          });
+      });
+      test('should return 400 for PUT with invalid body', () => {
+        return superagent.put(`:4444/api/gallery/${this.res.body._id}`)
+          .set('Authorization', `Bearer ${this.userData.token}`)
+          .send({ mynameis: 'hello', desc: 'this is a description' })
+          .catch(err => {
+            expect(err.status).toBe(404);
+          });
+      });
+
+    });
+  });
+
   // //****************DELETEBYID****************
   // describe('DELETE to /api/newApi', function() {
   //   describe('Valid Requests to DELETE', () => {
