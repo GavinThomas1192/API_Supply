@@ -37,9 +37,6 @@ module.exports = function(router) {
 
 
       .then(api => {
-        console.log(api);
-        console.log(typeof(api));
-
         if(!api) return errorHandler(new Error('No Such Category; must be complete'));
         res.json(api);
       })
@@ -50,8 +47,10 @@ module.exports = function(router) {
   router.get('/api/newApi/getAll', bearerAuth, (req, res) => {
     debug('GET /api/gallery');
 
+
+
     return APISupply.find()
-      .then(api => res.json(api.map(api => api._id)))
+      .then(api => res.json(api.map(api => (api))))
       .catch(err => errorHandler(err, req, res));
   });
 
