@@ -306,15 +306,6 @@ _______________
 ##### Example request body
       {
         "name": "Different Title",
-        "url": "https://unsplash.com/developers",
-        "desc": "Build powerful photo apps with free high definition images from Unsplash",
-        "examplesOfUse": "Random background image change, Memory game with random images",
-        "examplesInUse": "https://crew.co/blog/unsplash-api/, https://www.programmableweb.com/api/unsplash",
-        "rating": "Average",
-        "tokenRequired": "True",
-        "tokenAccessWaitTime": "Initially, your application will be in development mode and will be rate-limited to 50 requests per hour. When ready for production, upload screenshots of your application (focusing on the proper attribution and use of Unsplash photos in your app), then click the “Request Approval” button. If approved, your rate limit will be increased to the full amount.",
-        "maxReqMin": "50 requests per hour",
-        "numUsersFav": "0",
         "_category": "photo"
       }
 
