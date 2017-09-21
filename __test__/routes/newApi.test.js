@@ -392,7 +392,7 @@ describe('Testing API-Supply Routes', function() {
     });
 
     describe('Invalid Requests to PUT ', () => {
-      beforeAll(() => {
+      beforeEach(() => {
         this.APISupply = {
           name: faker.random.word(),
           url: faker.internet.url(),
@@ -452,15 +452,17 @@ describe('Testing API-Supply Routes', function() {
             _category: 'sports',
           })
           .catch(err => {
-            expect(err.status).toBe(500);
+            console.log(err);
+            expect(err.status).toBe(404);
           });
       });
-      test('should return 401 for PUT with invalid body ##NEEDSFIX', () => {
+      test('should return 400 for PUT with invalid body ##NEEDSFIX', () => {
         return superagent.put(`:4444/api/newApi/${this.res.body._id}`)
           .set('Authorization', `Bearer ${this.userData.token}`)
           .send({ })
           .catch(err => {
-            expect(err.status).toBe(500);
+            // console.log(err);
+            expect(err.status).toBe(400);
           });
       });
 

@@ -61,19 +61,19 @@ module.exports = function(router) {
   router.put('/api/newApi/:_id', bearerAuth, jsonParser, (req, res) => {
     debug('PUT /api/newApi');
     console.log(req.body.name);
-    if(!req.body.name) return errorHandler(new Error('All Fields; must be complete'), req, res);
-    if(!req.body.url) return errorHandler(new Error('All Fields; must be complete'), req, res);
-    if(!req.body.desc) return errorHandler(new Error('All Fields; must be complete'), req, res);
-    if(!req.body.examplesOfUse) return errorHandler(new Error('All Fields; must be complete'), req, res);
-    if(!req.body.examplesInUse) return errorHandler(new Error('All Fields; must be complete'), req, res);
-    if(!req.body.rating) return errorHandler(new Error('All Fields; must be complete'), req, res);
-    if(!req.body.tokenRequired) return errorHandler(new Error('All Fields; must be complete'), req, res);
-    if(!req.body.tokenAccessWaitTime) return errorHandler(new Error('All Fields; must be complete'), req, res);
-    if(!req.body.maxReqMin) return errorHandler(new Error('All Fields; must be complete'), req, res);
-    if(!req.body.numUsersFav) return errorHandler(new Error('All Fields; must be complete'), req, res);
-    if(!req.body._category) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body.name) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body.url) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body.desc) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body.examplesOfUse) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body.examplesInUse) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body.rating) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body.tokenRequired) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body.tokenAccessWaitTime) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body.maxReqMin) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body.numUsersFav) return errorHandler(new Error('All Fields; must be complete'), req, res);
+    // if(!req.body._category) return errorHandler(new Error('All Fields; must be complete'), req, res);
 
-
+    console.log(typeof req.user.isAdmin);
     if(req.user.isAdmin === true){
 
       return APISupply.findById(req.params._id)
@@ -89,7 +89,8 @@ module.exports = function(router) {
             api.tokenAccessWaitTime = req.body.tokenAccessWaitTime || api.tokenAccessWaitTime;
             api.maxReqMin = req.body.maxReqMin || api.maxReqMin;
             api.numUsersFav = req.body.numUsersFav || api.numUsersFav;
-            api.category = req.body._category || api._category;
+            api._category = req.body._category || api._category;
+            api.userId = req.user._id || api.userId;
 
 
             return api.save();
