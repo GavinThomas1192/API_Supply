@@ -393,7 +393,7 @@ describe('Testing API-Supply Routes', function() {
 
     describe('Invalid Requests to PUT ', () => {
       beforeAll(() => {
-        this.APISupply = this.APISupply = {
+        this.APISupply = {
           name: faker.random.word(),
           url: faker.internet.url(),
           desc: faker.random.words(12),
@@ -419,14 +419,24 @@ describe('Testing API-Supply Routes', function() {
         return superagent.put(`:4444/api/newApi/${this.res.body._id}`)
           .set('Authorization', `Bearer ${this.userData.token + 1}`)
           .send({
-            name: faker.random.word(), url: faker.internet.url(), desc: faker.random.words(12), examplesOfUse: faker.lorem.words(), examplesInUse: faker.internet.url(), rating: 'awesome', tokenRequired: 'yes', tokenAccessWaitTime: '36hrs', maxReqMin: '20', numUsersFav: '3', category: 'entertainment',
+            name: faker.random.word(),
+            url: faker.internet.url(),
+            desc: faker.random.words(12),
+            examplesOfUse: faker.lorem.words(),
+            examplesInUse: faker.internet.url(),
+            rating: 'poor',
+            tokenRequired: 'yes',
+            tokenAccessWaitTime: '36hrs',
+            maxReqMin: '20',
+            numUsersFav: '3',
+            _category: 'music',
           })
           .catch(err => {
             expect(err.status).toBe(401);
           });
       });
       test('should return 404 for PUT with invalid ID ##NEEDSFIX', () => {
-        return superagent.put(`:4444/api/newApi/${this.res.body._id + 1}`)
+        return superagent.put(`:4444/api/newApi/44444546`)
           .set('Authorization', `Bearer ${this.userData.token}`)
           .send({
             name: faker.random.word(),
@@ -439,7 +449,7 @@ describe('Testing API-Supply Routes', function() {
             tokenAccessWaitTime: '36hrs',
             maxReqMin: '20',
             numUsersFav: '3',
-            _category: 'music',
+            _category: 'sports',
           })
           .catch(err => {
             expect(err.status).toBe(500);
