@@ -436,7 +436,7 @@ describe('Testing API-Supply Routes', function() {
             expect(err.status).toBe(401);
           });
       });
-      test('should return 404 for PUT with invalid ID ##NEEDSFIX', () => {
+      test('should return 404 for PUT with invalid ID', () => {
         return superagent.put(`:4444/api/newApi/44444546`)
           .set('Authorization', `Bearer ${this.userData.token}`)
           .send({
@@ -457,7 +457,7 @@ describe('Testing API-Supply Routes', function() {
             expect(err.status).toBe(404);
           });
       });
-      test('should return 400 for PUT with invalid body ##NEEDSFIX', () => {
+      test('should return 400 for PUT with invalid body', () => {
         return superagent.put(`:4444/api/newApi/${this.res.body._id}`)
           .set('Authorization', `Bearer ${this.userData.token}`)
           .send({ })
