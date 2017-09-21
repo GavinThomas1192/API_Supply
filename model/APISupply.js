@@ -14,7 +14,7 @@ const APISupply = mongoose.Schema({
   maxReqMin: {type: String, required: true },
   numUsersFav: {type: String, required: false },
   _category: {type: String, required: true },
-  userId: { type:mongoose.Schema.Types.ObjectId, required: true, unique: true  },
+  userId: { type:mongoose.Schema.Types.ObjectId, required: true },
 }, { timestamps: true });
 
 module.exports = mongoose.model('APISupply', APISupply);
