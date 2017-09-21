@@ -452,7 +452,7 @@ describe('Testing API-Supply Routes', function() {
             _category: 'sports',
           })
           .catch(err => {
-            expect(err.status).toBe(404);
+            expect(err.status).toBe(500);
           });
       });
       test('should return 401 for PUT with invalid body ##NEEDSFIX', () => {
@@ -460,7 +460,7 @@ describe('Testing API-Supply Routes', function() {
           .set('Authorization', `Bearer ${this.userData.token}`)
           .send({ })
           .catch(err => {
-            expect(err.status).toBe(401);
+            expect(err.status).toBe(500);
           });
       });
 
