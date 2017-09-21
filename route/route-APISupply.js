@@ -37,7 +37,7 @@ module.exports = function(router) {
 
 
       .then(api => {
-        if(!api) return errorHandler(new Error('No Such Category; must be complete'));
+        if(!api) return errorHandler(new Error('No Such Category'));
         res.json(api);
       })
       .catch(err => errorHandler(err, req, res));
@@ -61,39 +61,27 @@ module.exports = function(router) {
   router.put('/api/newApi/:_id', bearerAuth, jsonParser, (req, res) => {
     debug('PUT /api/newApi');
 
-    if(!req.body.name) return errorHandler(new Error('All Fields; must be complete'));
-    if(!req.body.url) return errorHandler(new Error('All Fields; must be complete'));
-    if(!req.body.desc) return errorHandler(new Error('All Fields; must be complete'));
-    if(!req.body.examplesOfUse) return errorHandler(new Error('All Fields; must be complete'));
-    if(!req.body.examplesInUse) return errorHandler(new Error('All Fields; must be complete'));
-    if(!req.body.rating) return errorHandler(new Error('All Fields; must be complete'));
-    if(!req.body.tokenRequired) return errorHandler(new Error('All Fields; must be complete'));
-    if(!req.body.tokenAccessWaitTime) return errorHandler(new Error('All Fields; must be complete'));
-    if(!req.body.maxReqMin) return errorHandler(new Error('All Fields; must be complete'));
-    if(!req.body.numUsersFav) return errorHandler(new Error('All Fields; must be complete'));
-    if(!req.body._category) return errorHandler(new Error('All Fields; must be complete'));
-
-    console.log(req.user.isAdmin);
     if(req.user.isAdmin === true){
-      console.log(req.user.isAdmin);
+
       return APISupply.findById(req.params._id)
         .then(api => {
-          if(api.userId.toString() === req.user._id.toString()) {
-            api.name = req.body.name || api.name;
-            api.url = req.body.url || api.url;
-            api.desc = req.body.desc || api.desc;
-            api.examplesOfUse = req.body.examplesOfUse || api.examplesOfUse;
-            api.examplesInUse = req.body.examplesInUse || api.examplesInUse;
-            api.rating = req.body.rating || api.rating;
-            api.tokenRequired = req.body.tokenRequired || api.tokenRequired;
-            api.tokenAccessWaitTime = req.body.tokenAccessWaitTime || api.tokenAccessWaitTime;
-            api.maxReqMin = req.body.maxReqMin || api.maxReqMin;
-            api.numUsersFav = req.body.numUsersFav || api.numUsersFav;
-            api.category = req.body._category || api._category;
+
+          api.name = req.body.name || api.name;
+          api.url = req.body.url || api.url;
+          api.desc = req.body.desc || api.desc;
+          api.examplesOfUse = req.body.examplesOfUse || api.examplesOfUse;
+          api.examplesInUse = req.body.examplesInUse || api.examplesInUse;
+          api.rating = req.body.rating || api.rating;
+          api.tokenRequired = req.body.tokenRequired || api.tokenRequired;
+          api.tokenAccessWaitTime = req.body.tokenAccessWaitTime || api.tokenAccessWaitTime;
+          api.maxReqMin = req.body.maxReqMin || api.maxReqMin;
+          api.numUsersFav = req.body.numUsersFav || api.numUsersFav;
+          api._category = req.body._category || api._category;
+          api.userId = req.user._id || api.userId;
 
 
-            return api.save();
-          }
+          return api.save();
+
         })
         .then(() => res.sendStatus(204))
         .catch(err => errorHandler(err, req, res));

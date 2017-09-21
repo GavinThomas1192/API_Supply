@@ -16,6 +16,7 @@ describe('Testing API-Supply Routes', function() {
 
   //****************POST****************
   describe('POST to /api/newApi', function() {
+
     describe('Valid Requests', function() {
       beforeAll(() => {
         this.APISupply = {
@@ -392,8 +393,8 @@ describe('Testing API-Supply Routes', function() {
     });
 
     describe('Invalid Requests to PUT ', () => {
-      beforeAll(() => {
-        this.APISupply = this.APISupply = {
+      beforeEach(() => {
+        this.APISupply = {
           name: faker.random.word(),
           url: faker.internet.url(),
           desc: faker.random.words(12),
@@ -419,16 +420,6 @@ describe('Testing API-Supply Routes', function() {
         return superagent.put(`:4444/api/newApi/${this.res.body._id}`)
           .set('Authorization', `Bearer ${this.userData.token + 1}`)
           .send({
-            name: faker.random.word(), url: faker.internet.url(), desc: faker.random.words(12), examplesOfUse: faker.lorem.words(), examplesInUse: faker.internet.url(), rating: 'awesome', tokenRequired: 'yes', tokenAccessWaitTime: '36hrs', maxReqMin: '20', numUsersFav: '3', category: 'entertainment',
-          })
-          .catch(err => {
-            expect(err.status).toBe(401);
-          });
-      });
-      test('should return 404 for PUT with invalid ID ##NEEDSFIX', () => {
-        return superagent.put(`:4444/api/newApi/${this.res.body._id + 1}`)
-          .set('Authorization', `Bearer ${this.userData.token}`)
-          .send({
             name: faker.random.word(),
             url: faker.internet.url(),
             desc: faker.random.words(12),
@@ -442,15 +433,37 @@ describe('Testing API-Supply Routes', function() {
             _category: 'music',
           })
           .catch(err => {
-            expect(err.status).toBe(500);
+            expect(err.status).toBe(401);
           });
       });
-      test('should return 401 for PUT with invalid body ##NEEDSFIX', () => {
+      test('should return 404 for PUT with invalid ID ##NEEDSFIX', () => {
+        return superagent.put(`:4444/api/newApi/44444546`)
+          .set('Authorization', `Bearer ${this.userData.token}`)
+          .send({
+            name: faker.random.word(),
+            url: faker.internet.url(),
+            desc: faker.random.words(12),
+            examplesOfUse: faker.lorem.words(),
+            examplesInUse: faker.internet.url(),
+            rating: 'poor',
+            tokenRequired: 'yes',
+            tokenAccessWaitTime: '36hrs',
+            maxReqMin: '20',
+            numUsersFav: '3',
+            _category: 'sports',
+          })
+          .catch(err => {
+            console.log(err);
+            expect(err.status).toBe(404);
+          });
+      });
+      test('should return 400 for PUT with invalid body ##NEEDSFIX', () => {
         return superagent.put(`:4444/api/newApi/${this.res.body._id}`)
           .set('Authorization', `Bearer ${this.userData.token}`)
           .send({ })
           .catch(err => {
-            expect(err.status).toBe(500);
+            // console.log(err);
+            expect(err.status).toBe(400);
           });
       });
 
