@@ -3,7 +3,7 @@
 ### Welcome to API_Supply!
 #### The API of APIs designed with code school students in mind.
 
-This RESTful Application Program Interface(API) is a collection of useful APIs meant for Code Fellows 301 students to reference in order to help brainstorm final project ideas. It's an API of APIs!
+This RESTful Application Programming Interface(API) is a collection of useful APIs meant for Code Fellows 301 students to reference in order to help brainstorm final project ideas. It's an API of APIs!
 
 This portion of the project is only the back-end infrastructure and functionality to create, read, update and delete data from a user and superuser standpoint. These two types of users can create an authenticated account to search through our small database of popular APIs by category, vet each API to ensure it will be useful, then add them to a list of favorites. Only the superuser has API update and delete privileges.
 
@@ -13,9 +13,13 @@ This portion of the project is only the back-end infrastructure and functionalit
 Using node.js, HTTP, Express, MongoDB, and Mongoose we have created a Server that responds to different GET, POST, PUT, and DELETE responses from a developer, backend position. The requests to our live server can interact with a remote Database created through Mlabs. In this example we use two schemas- Users and APIs. There are two types of Users, SuperUser and User. Only the SuperUser can POST, PUT, and DELETE. This project represents what is possible with a few simple tools.
 
 ### About the Team
-* [Isaiah Walker](https://github.com/Lonewalker72)
-* [Madeline Stevens](https://github.com/madhubs)
-* [Gavin Thomas](https://github.com/GavinThomas1192)
+* Isaiah Walker
+[![LinkedInProfile](https://img.shields.io/badge/LinkedIn-Profile-brightgreen.svg)](https://www.linkedin.com/in/isaiahgwalker/) [![View My Github](https://img.shields.io/badge/View%20My-Github-blue.svg)](https://github.com/Lonewalker72)
+
+* Madeline Stevens
+[![LinkedInProfile](https://img.shields.io/badge/LinkedIn-Profile-brightgreen.svg)](https://www.linkedin.com/in/madelinerosestevens/) [![View My Github](https://img.shields.io/badge/View%20My-Github-blue.svg)](https://github.com/madhubs)
+
+* Gavin Thomas [![LinkedInProfile](https://img.shields.io/badge/LinkedIn-Profile-brightgreen.svg)](https://www.linkedin.com/in/gavinthomas1192/) [![View My Github](https://img.shields.io/badge/View%20My-Github-blue.svg)](https://github.com/GavinThomas1192)
 
 ### Table of Contents
 + [Flowchart](#flowchart)
@@ -25,7 +29,10 @@ Using node.js, HTTP, Express, MongoDB, and Mongoose we have created a Server tha
 
 ### Flowchart
 This flowchart will help visualize our requests, our routes and our endpoints.
-![flowchart]()
+![flowchart](photos/401-flowchart.001.png)
+![flowchart](photos/401-flowchart.002.png)
+![flowchart](photos/401-flowchart.003.png)
+![flowchart](photos/401-flowchart.004.png)
 
 https://api-supply.herokuapp.com/
 https://api-supply-staging.herokuapp.com/
