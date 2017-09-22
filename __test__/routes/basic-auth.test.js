@@ -34,6 +34,32 @@ describe('Testing basic auth routes', function() {
     test('should respond with 200 on successful signUp:', () => {
       expect(this.res.status).toBe(200);
     });
+    describe('Should throw 409 error duplicate', () => {
+      beforeAll(() => {
+        this.mockUserData = {
+          name: 'Madeline',
+          username: 'MaddyRocks101',
+          password: 'ILoveCodez',
+          email: 'testtest.com',
+          subscribedToEmail: true,
+          isAdmin: true,
+        };
+
+
+        return superagent.post(':4444/api/signUp')
+          .send(this.mockUserData)
+          .then(res => this.res = res)
+          .catch(console.error);
+      });
+      test('signup with duplicate name and username', () => {
+        return superagent.post(':4444/api/signUp')
+          .send(this.mockUserData)
+          .then(res => this.res = res)
+          .catch(err => {
+            expect(err.status).toBe(409);
+          });
+      });
+    });
   });
 
 
