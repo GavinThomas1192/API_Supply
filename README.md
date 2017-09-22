@@ -198,6 +198,16 @@ _______________
 
 ##### Format of getAllByCategory route
       https://api-supply.herokuapp.com/api/newapi/getallbycategory/:_category
+      We have a total of 8 categories, sports
+      gaming
+      social
+      educational
+      fun
+      Photo
+      film
+      music
+      entertainment
+
 
 ##### Example route getAllByCategory with :\_category as a PARAMETER
       https://api-supply.herokuapp.com/api/newapi/getallbycategory/sports
