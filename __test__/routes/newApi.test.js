@@ -453,7 +453,6 @@ describe('Testing API-Supply Routes', function() {
             _category: 'sports',
           })
           .catch(err => {
-            console.log(err);
             expect(err.status).toBe(404);
           });
       });
