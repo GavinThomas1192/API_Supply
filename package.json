@@ -47,7 +47,9 @@
     "eslint": "^4.5.0",
     "faker": "^4.1.0",
     "jest": "^20.0.4",
-    "superagent": "^3.6.0"
+    "superagent": "^3.6.0",
+    "browser-sync": "2.18.13",
+    "gulp": "^3.9.1"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
@@ -58,6 +60,10 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "jsonwebtoken": "^8.0.0",
-    "mongoose": "^4.11.10"
+    "mongoose": "^4.11.10",
+    "bootstrap": "^4.0.0-beta",
+    "jquery": "^3.2.1",
+    "jquery.easing": "^1.4.1",
+    "popper.js": "^1.11.1"
   }
 }
