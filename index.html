@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>API-Supply</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Take me to the top!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#docs">Docs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#tryIt">Try it out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="bg-primary text-white">
+      <div class="container text-center">
+        <h1>Welcome to API-Supply</h1>
+        <p class="lead">We are an API of API's</p>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>About this page</h2>
+            <p class="lead">This RESTful Application Programming Interface(API) is a collection of useful APIs meant for developers to reference in order to help brainstorm final project ideas. It's an API of APIs!</p>
+            Using node.js, HTTP, Express, MongoDB, and Mongoose we have created a Server that responds to different GET, POST, PUT, and DELETE responses. The requests to our live server can interact with a remote Database created through Mlabs. In this example we use two schemas- Users and APIs. There are two types of Users, SuperUser and User. Only the SuperUser can POST, PUT, and DELETE. This project represents what is possible with a few simple tools.
+            <ul>
+              <li>Node.js</li>
+              <li>Express</li>
+              <li>MongoDB</li>
+              <li>Mongoose</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="docs" class="bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Docs</h2>
+            <p class="lead">
+            <h2>Routes</h2>
+            <h3>SignUp</h3>
+            <h4>POST</h4>
+            <h5>First you must Sign Up for an account with a POST request to receive an authentication token associated with your account.</h5>
+            <h5>Example route</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/signup
+            </code></pre>
+            <h5>Example request body</h5>
+            <pre><code>  {
+              &quot;username&quot;: &quot;Gavin&quot;,
+              &quot;name&quot;: &quot;Thomas&quot;,
+              &quot;password&quot;: &quot;1234&quot;,
+              &quot;email&quot;: &quot;test@test.com&quot;,
+              &quot;subscribedToEmail&quot;: &quot;true&quot;,
+              &quot;isAdmin&quot;: &quot;true&quot;
+              }
+              NOTE: You can create a SuperUser, who has access to all CRUD operations by assigning a key/value &quot;isAdmin&quot;: true; vs every other user who should be &quot;isAdmin&quot;: false;.
+            </code></pre>
+            <h5>Example response body</h5>
+            <pre><code>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+            </code></pre>
+            <hr />
+            <h3>SignIn</h3>
+            <h4>GET</h4>
+            <h5>In addition to signing up, you can make a GET request to sign in for returning users. This will generate a new Authorization Token to be used during that User's session.</h5>
+            <h5>Example route</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/signin
+            </code></pre>
+            <h5>Example Basic Auth</h5>
+            <pre><code>  {
+              &quot;username&quot;: &quot;Gavin&quot;,
+              &quot;password&quot;: &quot;1234&quot;,
+              }
+            </code></pre>
+            <h5>Example response Body</h5>
+            <pre><code>  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+            </code></pre>
+            <hr />
+            <h3>POST</h3>
+            <h5>The SuperUser only can make POST requests to store API objects into the Mlabs Database.</h5>
+            <h5>Example route</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/newapi
+            </code></pre>
+            <h5>Example auth headers</h5>
+            <pre><code>  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+            </code></pre>
+            <h5>Example request body</h5>
+            <pre><code>  {
+                &quot;name&quot;: &quot;Unsplash&quot;,
+                &quot;url&quot;: &quot;https://unsplash.com/developers&quot;,
+                &quot;desc&quot;: &quot;Build powerful photo apps with free high definition images from Unsplash&quot;,
+                &quot;examplesOfUse&quot;: &quot;Random background image change, Memory game with random images&quot;,
+                &quot;examplesInUse&quot;: &quot;https://crew.co/blog/unsplash-api/, https://www.programmableweb.com/api/unsplash&quot;,
+                &quot;rating&quot;: &quot;Average&quot;,
+                &quot;tokenRequired&quot;: &quot;True&quot;,
+                &quot;tokenAccessWaitTime&quot;: &quot;Initially, your application will be in development mode and will be rate-limited to 50 requests per hour. When ready for production, upload screenshots of your application (focusing on the proper attribution and use of Unsplash photos in your app), then click the “Request Approval” button. If approved, your rate limit will be increased to the full amount.&quot;,
+                &quot;maxReqMin&quot;: &quot;50 requests per hour&quot;,
+                &quot;numUsersFav&quot;: &quot;0&quot;,
+                &quot;_category&quot;: &quot;photo&quot;
+              }
+            </code></pre>
+            <h5>Example response Body</h5>
+            <pre><code>  {
+                  &quot;__v&quot;: 0,
+                  &quot;updatedAt&quot;: &quot;2017-09-20T19:58:08.343Z&quot;,
+                  &quot;createdAt&quot;: &quot;2017-09-20T19:58:08.343Z&quot;,
+                  &quot;name&quot;: &quot;Unsplash&quot;,
+                  &quot;url&quot;: &quot;https://unsplash.com/developers&quot;,
+                  &quot;desc&quot;: &quot;Build powerful photo apps with free high definition images from Unsplash&quot;,
+                  &quot;examplesOfUse&quot;: &quot;Random background image change, Memory game with random images&quot;,
+                  &quot;examplesInUse&quot;: &quot;https://crew.co/blog/unsplash-api/, https://www.programmableweb.com/api/unsplash&quot;,
+                  &quot;rating&quot;: &quot;Average&quot;,
+                  &quot;tokenRequired&quot;: true,
+                  &quot;tokenAccessWaitTime&quot;: &quot;Initially, your application will be in development mode and will be rate-limited to 50 requests per hour. When ready for production, upload screenshots of your application (focusing on the proper attribution and use of Unsplash photos in your app), then click the “Request Approval” button. If approved, your rate limit will be increased to the full amount.&quot;,
+                  &quot;maxReqMin&quot;: &quot;50 requests per hour&quot;,
+                  &quot;numUsersFav&quot;: &quot;0&quot;,
+                  &quot;_category&quot;: &quot;photo&quot;,
+                  &quot;userId&quot;: &quot;59c2a7653e80cc0012de07d7&quot;,
+                  &quot;_id&quot;: &quot;59c2c85098d3000012c9f0b6&quot;
+              }
+            </code></pre>
+            <hr />
+            <h3>GET</h3>
+            <h5>All Users can make GET requests. The 3 GET endpoints are:</h5>
+            <ul>
+            <li>Get all</li>
+            <li>Get all by category</li>
+            <li>Get by Id</li>
+            </ul>
+            <h5>Format of getAll route</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/newapi/getall
+            </code></pre>
+            <h5>Example auth headers</h5>
+            <pre><code>  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+            </code></pre>
+            <h5>Example response body</h5>
+            <pre><code>  [
+              {
+                  &quot;name&quot;: &quot;last.fm&quot;,
+                  &quot;_id&quot;: &quot;59c2c7e398d3000012c9f0b1&quot;
+              },
+              {
+                  &quot;name&quot;: &quot;OMDb&quot;,
+                  &quot;_id&quot;: &quot;59c2c80598d3000012c9f0b2&quot;
+              },
+              {
+                  &quot;name&quot;: &quot;Fitbit&quot;,
+                  &quot;_id&quot;: &quot;59c2c80998d3000012c9f0b3&quot;
+              },
+              {
+                  &quot;name&quot;: &quot;The Movie DB&quot;,
+                  &quot;_id&quot;: &quot;59c2c83598d3000012c9f0b4&quot;
+              },
+              ]
+            </code></pre>
+            <hr />
+            <h5>Format Of getAllById route</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/newapi/getallbyid/:_id
+            </code></pre>
+            <h5>Example route getAllById with :_id sent as a PARAMETER</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/newapi/getallbyid/59c2c80598d3000012c9f0b2
+            </code></pre>
+            <h5>Example auth headers</h5>
+            <pre><code>  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+            </code></pre>
+            <h5>Example response body</h5>
+            <pre><code>  {
+              &quot;_id&quot;: &quot;59c2c80598d3000012c9f0b2&quot;,
+              &quot;updatedAt&quot;: &quot;2017-09-20T19:56:53.941Z&quot;,
+              &quot;createdAt&quot;: &quot;2017-09-20T19:56:53.941Z&quot;,
+              &quot;name&quot;: &quot;OMDb&quot;,
+              &quot;url&quot;: &quot;http://www.omdbapi.com/&quot;,
+              &quot;desc&quot;: &quot;The OMDb API is a RESTful web service to obtain movie information, all content and images on the site are contributed and maintained by our users. &quot;,
+              &quot;examplesOfUse&quot;: &quot;Random Movie Generator, Movie Tinder, Personality test based on favorite movies&quot;,
+              &quot;examplesInUse&quot;: &quot;https://github.com/Omertron/api-omdb, https://github.com/misterhat/omdb&quot;,
+              &quot;rating&quot;: &quot;Average&quot;,
+              &quot;tokenRequired&quot;: true,
+              &quot;tokenAccessWaitTime&quot;: &quot;You must submit your email to recieve a key within 5 hours.&quot;,
+              &quot;maxReqMin&quot;: &quot;Unknown&quot;,
+              &quot;numUsersFav&quot;: &quot;0&quot;,
+              &quot;_category&quot;: &quot;Film&quot;,
+              &quot;userId&quot;: &quot;59c2a7653e80cc0012de07d7&quot;,
+              &quot;__v&quot;: 0
+              }
+            </code></pre>
+            <hr />
+            <h5>Format of getAllByCategory route</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/newapi/getallbycategory/:_category
+              We have a total of 8 categories, sports
+              gaming
+              social
+              educational
+              fun
+              Photo
+              film
+              music
+              entertainment
+            </code></pre>
+            <h5>Example route getAllByCategory with :_category as a PARAMETER</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/newapi/getallbycategory/sports
+            </code></pre>
+            <h5>Example auth headers</h5>
+            <pre><code>  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+            </code></pre>
+            <h5>Example response body</h5>
+            <pre><code>  [
+              {
+                &quot;_id&quot;: &quot;59c2c80998d3000012c9f0b3&quot;,
+                &quot;updatedAt&quot;: &quot;2017-09-20T19:56:57.611Z&quot;,
+                &quot;createdAt&quot;: &quot;2017-09-20T19:56:57.611Z&quot;,
+                &quot;name&quot;: &quot;Fitbit&quot;,
+                &quot;url&quot;: &quot;https://dev.fitbit.com/&quot;,
+                &quot;desc&quot;: &quot;As describe, \&quot;The Fitbit Web API enables third-party applications to access and write data on behalf of users.\&quot; Requires the use of fitbit studio.&quot;,
+                &quot;examplesOfUse&quot;: &quot;personalized fitness apps&quot;,
+                &quot;examplesInUse&quot;: &quot;https://github.com/pugwonk/FitbitAndroidSample&quot;,
+                &quot;rating&quot;: &quot;mvp&quot;,
+                &quot;tokenRequired&quot;: false,
+                &quot;tokenAccessWaitTime&quot;: &quot;Instant via OAuth&quot;,
+                &quot;maxReqMin&quot;: &quot;150/hour w/o token || 150/hour for each user that has authorized your application for their data via token&quot;,
+                &quot;numUsersFav&quot;: &quot;0&quot;,
+                &quot;_category&quot;: &quot;sports&quot;,
+                &quot;userId&quot;: &quot;59c2aaa33e80cc0012de07da&quot;,
+                &quot;__v&quot;: 0
+              },
+              {
+                &quot;_id&quot;: &quot;59c2c84898d3000012c9f0b5&quot;,
+                &quot;updatedAt&quot;: &quot;2017-09-20T19:58:00.213Z&quot;,
+                &quot;createdAt&quot;: &quot;2017-09-20T19:58:00.213Z&quot;,
+                &quot;name&quot;: &quot;Sportradar&quot;,
+                &quot;url&quot;: &quot;https://developer.sportradar.us/&quot;,
+                &quot;desc&quot;: &quot;Provides real time sports data.&quot;,
+                &quot;examplesOfUse&quot;: &quot;Real time sports analytics&quot;,
+                &quot;examplesInUse&quot;: &quot;sportxts&quot;,
+                &quot;rating&quot;: &quot;Awesome&quot;,
+                &quot;tokenRequired&quot;: true,
+                &quot;tokenAccessWaitTime&quot;: &quot;Upon application review&quot;,
+                &quot;maxReqMin&quot;: &quot;1000 per 30days || token expires after 90 days&quot;,
+                &quot;numUsersFav&quot;: &quot;0&quot;,
+                &quot;_category&quot;: &quot;sports&quot;,
+                &quot;userId&quot;: &quot;59c2aaa33e80cc0012de07da&quot;,
+                &quot;__v&quot;: 0
+              },
+              {
+                &quot;_id&quot;: &quot;59c2c86e98d3000012c9f0b7&quot;,
+                &quot;updatedAt&quot;: &quot;2017-09-20T19:58:38.117Z&quot;,
+                &quot;createdAt&quot;: &quot;2017-09-20T19:58:38.117Z&quot;,
+                &quot;name&quot;: &quot;ESPN&quot;,
+                &quot;url&quot;: &quot;http://www.espn.com/apis/devcenter/&quot;,
+                &quot;desc&quot;: &quot;Provide a variety of API data to choose from. Well worth checking out.&quot;,
+                &quot;examplesOfUse&quot;: &quot;Real time sports analytics&quot;,
+                &quot;examplesInUse&quot;: &quot;Sports game or sports analytics app&quot;,
+                &quot;rating&quot;: &quot;Awesome&quot;,
+                &quot;tokenRequired&quot;: true,
+                &quot;tokenAccessWaitTime&quot;: &quot;Upon registering&quot;,
+                &quot;maxReqMin&quot;: &quot;It Depends on consumer tier&quot;,
+                &quot;numUsersFav&quot;: &quot;0&quot;,
+                &quot;_category&quot;: &quot;sports&quot;,
+                &quot;userId&quot;: &quot;59c2aaa33e80cc0012de07da&quot;,
+                &quot;__v&quot;: 0
+              },
+              {
+                &quot;_id&quot;: &quot;59c2c8a098d3000012c9f0b8&quot;,
+                &quot;updatedAt&quot;: &quot;2017-09-20T19:59:28.390Z&quot;,
+                &quot;createdAt&quot;: &quot;2017-09-20T19:59:28.390Z&quot;,
+                &quot;name&quot;: &quot;Nike Plus API&quot;,
+                &quot;url&quot;: &quot;https://developer.nike.com&quot;,
+                &quot;desc&quot;: &quot;Developers can use the API to access the raw data of their workout. It uses RESTful calls and responses are formatted in XML.&quot;,
+                &quot;examplesOfUse&quot;: &quot;Personal fitness app&quot;,
+                &quot;examplesInUse&quot;: &quot;https://github.com/mnmly/nike-plus-api&quot;,
+                &quot;rating&quot;: &quot;Awesome&quot;,
+                &quot;tokenRequired&quot;: true,
+                &quot;tokenAccessWaitTime&quot;: &quot;You recieve one on signup&quot;,
+                &quot;maxReqMin&quot;: &quot;unknown&quot;,
+                &quot;numUsersFav&quot;: &quot;0&quot;,
+                &quot;_category&quot;: &quot;sports&quot;,
+                &quot;userId&quot;: &quot;59c2aaa33e80cc0012de07da&quot;,
+                &quot;__v&quot;: 0
+              },
+              {
+                &quot;_id&quot;: &quot;59c2c8b698d3000012c9f0b9&quot;,
+                &quot;updatedAt&quot;: &quot;2017-09-20T19:59:50.958Z&quot;,
+                &quot;createdAt&quot;: &quot;2017-09-20T19:59:50.958Z&quot;,
+                &quot;name&quot;: &quot;Yahoo Fantasy Sports&quot;,
+                &quot;url&quot;: &quot;https://developer.yahoo.com/fantasysports/&quot;,
+                &quot;desc&quot;: &quot;Sports data that, can be used to build non-commercial tools and applications that help analyze draft results, review free agents, optimize current rosters, or other apps The Yahoo Fantasy Sports API utilizes the Yahoo Query Language (YQL) as a mechanism to access Yahoo Fantasy Sports data, returning data in XML and JSON formats.&quot;,
+                &quot;examplesOfUse&quot;: &quot;sports data analytics&quot;,
+                &quot;examplesInUse&quot;: &quot;https://github.com/philip/YahooFantasySportsAPI&quot;,
+                &quot;rating&quot;: &quot;Awesome&quot;,
+                &quot;tokenRequired&quot;: true,
+                &quot;tokenAccessWaitTime&quot;: &quot;upon application review&quot;,
+                &quot;maxReqMin&quot;: &quot;3333&quot;,
+                &quot;numUsersFav&quot;: &quot;0&quot;,
+                &quot;_category&quot;: &quot;sports&quot;,
+                &quot;userId&quot;: &quot;59c2aaa33e80cc0012de07da&quot;,
+                &quot;__v&quot;: 0
+              }
+              ]
+            </code></pre>
+            <hr />
+            <h3>PUT</h3>
+            <h5>The SuperUser only can make PUT requests to store API objects into the Mlabs Database.</h5>
+            <h5>Format of PUT route</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/newapi/:_id
+              NOTE: The _id refers to the _id in the api object and NOT the userId.
+            </code></pre>
+            <h5>Example route with :_id as a PARAMETER</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/newapi/59c2c8b698d3000012c9f0b9
+            </code></pre>
+            <h5>Example auth headers</h5>
+            <pre><code>  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+            </code></pre>
+            <h5>Example request body</h5>
+            <pre><code>  {
+                &quot;name&quot;: &quot;Different Title&quot;,
+                &quot;_category&quot;: &quot;photo&quot;
+              }
+            </code></pre>
+            <h5>Example response Body</h5>
+            <pre><code>  {
+                  &quot;__v&quot;: 0,
+                  &quot;updatedAt&quot;: &quot;2017-09-20T19:58:08.343Z&quot;,
+                  &quot;createdAt&quot;: &quot;2017-09-20T19:58:08.343Z&quot;,
+                  &quot;name&quot;: &quot;Different Title&quot;,
+                  &quot;url&quot;: &quot;https://unsplash.com/developers&quot;,
+                  &quot;desc&quot;: &quot;Build powerful photo apps with free high definition images from Unsplash&quot;,
+                  &quot;examplesOfUse&quot;: &quot;Random background image change, Memory game with random images&quot;,
+                  &quot;examplesInUse&quot;: &quot;https://crew.co/blog/unsplash-api/, https://www.programmableweb.com/api/unsplash&quot;,
+                  &quot;rating&quot;: &quot;Average&quot;,
+                  &quot;tokenRequired&quot;: true,
+                  &quot;tokenAccessWaitTime&quot;: &quot;Initially, your application will be in development mode and will be rate-limited to 50 requests per hour. When ready for production, upload screenshots of your application (focusing on the proper attribution and use of Unsplash photos in your app), then click the “Request Approval” button. If approved, your rate limit will be increased to the full amount.&quot;,
+                  &quot;maxReqMin&quot;: &quot;50 requests per hour&quot;,
+                  &quot;numUsersFav&quot;: &quot;0&quot;,
+                  &quot;_category&quot;: &quot;photo&quot;,
+                  &quot;userId&quot;: &quot;59c2a7653e80cc0012de07d7&quot;,
+                  &quot;_id&quot;: &quot;59c2c85098d3000012c9f0b6&quot;
+              }
+            </code></pre>
+            <hr />
+            <h3>DELETE</h3>
+            <h5>The SuperUser only can make DELETE requests to remove API objects into the Mlabs Database.</h5>
+            <h5>Format of DELETE route</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/newapi/:_id
+              NOTE: The _id refers to the _id in the api object and NOT the userId.
+            </code></pre>
+            <h5>Example route with :_id as a PARAMETER</h5>
+            <pre><code>  https://api-supply.herokuapp.com/api/newapi/59c2c8b698d3000012c9f0b9
+            </code></pre>
+            <h5>Example auth headers</h5>
+            <pre><code>  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEyYzNjMTM2ODVkMzNiNDZmM2Y2xxxxN2U4MTYxNDAxNGNhYjRlYzEzMjQ0ZmYxMzE4ZTk0NjAzZDgyNDQxNDMiLCJpYXQiOjE1MDU5NDEwMzl9.SBU98dd7efiTcb0cZb2YNsn8CRH06YkQA41IsK2IrZU
+            </code></pre>
+            <p><code>NOTE: Upon successful request expect a 204</code></p>
+            <hr />
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Contact us</h2>
+            <p class="lead">
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tryIt">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Try it out</h2>
+            <p class="lead">
+              <button id="signUp">Sign Up</button>
+              <button id="signIn">Sign In</button>
+              <button id="POST">Post a New API</button>
+              <button id="GETALL">Get all our API's</button>
+              <button id="GETALLBYID">Get by Id</button>
+              <button id="GETCATEGORY">Get by Category</button>
+              <button id="DELETE">Delete an API</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom JavaScript for this theme -->
+    <script src="js/scrolling-nav.js"></script>
+
+  </body>
+
+</html>
